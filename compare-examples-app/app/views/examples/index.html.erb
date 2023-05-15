@@ -1,14 +1,37 @@
-<p style="color: green"><%= notice %></p>
+<%= render 'shared/notice' %>
+<%= render partial: 'shared/header', locals: { title: "Traduçoes" } %>
 
-<h1>Examples</h1>
+<div id="pending_examples">
+  <h4>Pendentes</h4>
+  <div class="list-group my-3">
+    <% @pending_examples.each do |example| %>
+      <%= render example %>
+    <% end %>
+  </div>
 
-<div id="examples">
-  <% @examples.each do |example| %>
-    <%= render example %>
-    <p>
-      <%= link_to "Show this example", example %>
-    </p>
-  <% end %>
+  <%= render partial: 'shared/empty_state',
+             locals: {
+               show: @pending_examples.empty?,
+               title: "Não ha traduções pendentes",
+               description: "Quando houver, elas aparecerão aqui.",
+             } %>
+
 </div>
 
-<%= link_to "New example", new_example_path %>
+<hr>
+
+<div id="reviewed_examples">
+  <h4>Revisadas</h4>
+  <div class="list-group my-3">
+    <% @reviewed_examples.each do |example| %>
+      <%= render example %>
+    <% end %>
+  </div>
+
+  <%= render partial: 'shared/empty_state',
+             locals: {
+               show: @reviewed_examples.empty?,
+               title: "Não ha traduções revisadas",
+               description: "Quando houver, elas aparecerão aqui.",
+             } %>
+</div>

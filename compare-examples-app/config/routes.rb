@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :examples do
-    resources :review, only: [:index, :new] do
+    resources :review, only: [:new, :create] do
 
     end
   end

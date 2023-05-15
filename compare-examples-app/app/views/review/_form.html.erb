@@ -1,5 +1,6 @@
+<%= render 'shared/notice' %>
 
-<%= form_with(model: example) do |form| %>
+<%= form_with(model: example, url: example_review_index_path, method: :post) do |form| %>
   <% if example.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(example.errors.count, "error") %> prohibited this example from being saved:</h2>
@@ -11,7 +12,7 @@
       </ul>
     </div>
   <% end %>
-  <div class="row my-5">
+  <div class="row">
     <div class="col">
       <div class="card card text-dark bg-light mb-3 w-100">
         <div class="card-header">Original</div>
@@ -33,12 +34,12 @@
 
   <div class="row my-5 justify-content-center">
     <div class="col-2">
-      <%= form.radio_button :approved, 'Reprovado', class: 'btn-check' %>
-      <%= form.label :approved, 'Reprovado', for: 'example_approved_reprovado', class: 'btn btn-outline-secondary w-100' %>
+      <%= form.radio_button :approved, 'false', class: 'btn-check' %>
+      <%= form.label :approved, 'Reprovado', for: 'example_approved_false', class: 'btn btn-outline-secondary w-100' %>
     </div>
     <div class="col-2">
-      <%= form.radio_button :approved, 'Aprovado', class: 'btn-check' %>
-      <%= form.label :approved, 'Aprovado', for: 'example_approved_aprovado', class: 'btn btn-outline-primary w-100' %>
+      <%= form.radio_button :approved, 'true', class: 'btn-check', required: :required %>
+      <%= form.label :approved, 'Aprovado', for: 'example_approved_true', class: 'btn btn-outline-primary w-100' %>
     </div>
   </div>
   </div>

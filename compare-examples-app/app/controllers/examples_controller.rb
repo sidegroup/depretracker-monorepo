@@ -1,25 +1,22 @@
 class ExamplesController < ApplicationController
   before_action :set_example, only: %i[ show edit update destroy ]
 
-  # GET /examples or /examples.json
   def index
-    @examples = Example.not_reviewed
+    @pending_examples = Example.not_reviewed.order(:id)
+
+    @reviewed_examples = Example.reviewed
   end
 
-  # GET /examples/1 or /examples/1.json
   def show
   end
 
-  # GET /examples/new
   def new
     @example = Example.new
   end
 
-  # GET /examples/1/edit
   def edit
   end
 
-  # POST /examples or /examples.json
   def create
     @example = Example.new(example_params)
 
@@ -34,7 +31,6 @@ class ExamplesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /examples/1 or /examples/1.json
   def update
     respond_to do |format|
       if @example.update(example_params)
@@ -47,7 +43,6 @@ class ExamplesController < ApplicationController
     end
   end
 
-  # DELETE /examples/1 or /examples/1.json
   def destroy
     @example.destroy
 
@@ -58,12 +53,10 @@ class ExamplesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_example
       @example = Example.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def example_params
       params.require(:example).permit(:approved, :original, :translation)
     end

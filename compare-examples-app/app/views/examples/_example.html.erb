@@ -1,22 +1,10 @@
-<div id="<%= dom_id example %>">
-  <p>
-    <strong>Approved:</strong>
-    <%= example.approved %>
-  </p>
+<%= link_to new_example_review_path(example), class: "list-group-item list-group-item-action d-flex justify-content-between p-4" do %>
+  <%= example.original.truncate(100) %>
 
-  <p>
-  <strong>Reviewed:</strong>
-  <%= example.reviewed %>
-  </p>
+  <% if example.approved %>
+    <span class="badge rounded-pill bg-primary">Aprovado</span>
+  <% else %>
+    <span class="badge rounded-pill bg-secondary">Reprovado</span>
+  <% end %>
 
-  <p>
-    <strong>Original:</strong>
-    <%= example.original %>
-  </p>
-
-  <p>
-    <strong>Translation:</strong>
-    <%= example.translation %>
-  </p>
-
-</div>
+<% end %>
