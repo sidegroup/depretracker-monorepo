@@ -1,7 +1,8 @@
 target := app
 ra := run --no-deps --rm $(target)
+dc := docker compose
 run := ${dc} ${ra}
-dc := docker-compose
+exec := ${dc} exec $(target)
 
 upd:
 	${dc} up -d
@@ -12,9 +13,8 @@ down:
 build:
 	${dc} up --build
 
-app-bundle:
-	${run} bundle install
-	${dc} up --build
+app-bundle: upd
+	${exec}
 
 app-bash: upd
 	${dc} exec $(target) bash

@@ -6,6 +6,11 @@ class ReviewController < ApplicationController
       flash[:notice] = "Todos as traduções foram revisados."
       redirect_to example_index_path
     end
+
+    # @example.translation = TranslationService.call(@example.original,
+    #                                                TranslationService::LANGUAGES[:english],
+    #                                                TranslationService::LANGUAGES[:portuguese],
+    #                                                TranslationService::Provider[:chatgpt])
   end
 
   def create
@@ -29,7 +34,7 @@ class ReviewController < ApplicationController
   private
 
   def set_example
-     @example = Example.find(params[:example_id])
+    @example = Example.find(params[:example_id])
   end
 
   def example_params
