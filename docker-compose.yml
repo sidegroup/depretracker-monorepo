@@ -1,0 +1,7 @@
+services:
+  scripts:
+    build: ./scripts
+    volumes:
+      - ./scripts:/scripts
+      - ./datasets:/scripts/datasets
+      - ./scripts/outputs:/scripts/outputs
