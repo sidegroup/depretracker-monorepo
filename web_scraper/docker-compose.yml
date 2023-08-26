@@ -37,6 +37,7 @@ services:
       - .:/web_scraper
     depends_on:
       - es
+      - kibana
 
 networks:
   default:
