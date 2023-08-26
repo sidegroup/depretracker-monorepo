@@ -4,6 +4,7 @@ from repositories.reddit_post_repository import RedditPostRepository
 from repositories.reddit_comment_repository import RedditCommentRepository
 from elasticsearch import Elasticsearch
 import praw
+from praw.models import MoreComments
 import datetime
 from time import sleep
 
@@ -51,6 +52,8 @@ for subreddit in subreddits:
                             post_repository.store("reddit_depressed_posts", submission)
 
                             for comment in submission.comments:
+                                if isinstance(comment, MoreComments):
+                                    continue
                                 comment_repository.store("reddit_depressed_comments", comment, submission.id)
 
                 except prawcore.exceptions.TooManyRequests as e:
