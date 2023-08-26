@@ -1,6 +1,6 @@
 import sys
-from web_scraper.src.crawlers.depressed_submissions_crawler import DepressedSubmissionsCrawler
-from web_scraper.src.crawlers.neutral_submissions_crawler import NeutralSubmissionsCrawler
+from src.crawlers.depressed_submissions_crawler import DepressedSubmissionsCrawler
+from src.crawlers.neutral_submissions_crawler import NeutralSubmissionsCrawler
 
 
 def main() -> int:

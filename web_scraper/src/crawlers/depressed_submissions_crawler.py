@@ -1,4 +1,4 @@
-from web_scraper.src.crawlers.reddit_base_crawler import RedditBaseCrawler
+from .reddit_base_crawler import RedditBaseCrawler
 
 
 class DepressedSubmissionsCrawler(RedditBaseCrawler):
