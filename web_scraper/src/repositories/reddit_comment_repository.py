@@ -1,10 +1,13 @@
 import datetime
+from praw.models import Comment
+
 
 class RedditCommentRepository:
-    def __init__(self, es_client):
+    def __init__(self, es_client, target_index):
         self.es_client = es_client
+        self.target_index = target_index
 
-    def store(self, target_index, comment, post_id):
+    def store(self, comment: Comment, post_id: int):
         print(".", end="", flush=True)
         document = {
             "id": comment.id,
@@ -21,5 +24,5 @@ class RedditCommentRepository:
             "post_id": post_id
         }
 
-        resp = self.es_client.index(index=target_index, id=document["id"], document=document)
+        resp = self.es_client.index(index=self.target_index, id=document["id"], document=document)
         return resp
