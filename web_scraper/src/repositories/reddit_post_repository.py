@@ -5,7 +5,6 @@ class RedditPostRepository:
         self.es_client = es_client
 
     def store(self, target_index, post):
-        print("Storing post: " + post.id)
         document = {
             "author_name": post.author.name if post.author else "",
             "author_flair": post.author_flair_text,
@@ -27,7 +26,5 @@ class RedditPostRepository:
             "upvote_ration": post.upvote_ratio,
             "url": post.url
         }
-
-        resp = self.es_client.index(index=target_index, id=document["id"], document=document)
-        print(resp)
+        resp = self.es_client.index(index=target_index, id=document["post_id"], document=document)
         return resp

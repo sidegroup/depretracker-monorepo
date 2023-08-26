@@ -5,7 +5,6 @@ class RedditCommentRepository:
         self.es_client = es_client
 
     def store(self, target_index, comment, post_id):
-        print("Storing comment: " + comment.id)
         document = {
             "id": comment.id,
             "author_name": comment.author.name if comment.author else "",
@@ -22,5 +21,4 @@ class RedditCommentRepository:
         }
 
         resp = self.es_client.index(index=target_index, id=document["id"], document=document)
-        print(resp)
         return resp

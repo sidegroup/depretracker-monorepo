@@ -15,6 +15,17 @@ services:
     ports:
       - 9200:9200
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.7.1
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es:9200
+      - "xpack.security.enabled=false"
+    ports:
+      - 5601:5601
+    depends_on:
+      - es
+
   web_scraper:
     build:
       context: .
