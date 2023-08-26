@@ -7,6 +7,7 @@ import praw
 import datetime
 from time import sleep
 
+SLEEP_TIME = 5
 es_client = Elasticsearch(hosts=[{'host': 'es', 'port': 9200, 'use_ssl': False}])
 post_repository = RedditPostRepository(es_client)
 comment_repository = RedditCommentRepository(es_client)
@@ -28,8 +29,13 @@ sort_types = ["relevance", "hot", "top", "new"]
 subreddits = ["arco_iris", "desabafos", "desabafo", "relacionamentos", "transbr", "EuSouOBabaca", "BissexualidadeBr"]
 
 for subreddit in subreddits:
+    print(f"Subreddit: {subreddit}")
+
     for string_de_busca in search_strings:
+        print(f"Search String: {search_strings.index(string_de_busca)}")
         for sort_type in sort_types:
+            print(f"Sort Type: {sort_type}")
+
             while True:
                 try:
                     submissions = reddit\
@@ -48,7 +54,7 @@ for subreddit in subreddits:
                                 comment_repository.store("reddit_depressed_comments", comment, submission.id)
 
                 except prawcore.exceptions.TooManyRequests as e:
-                    print(f"Too many requests. Sleeping for {e.retry_after} seconds.")
-                    sleep(e.retry_after)
+                    print(f"Too many requests. Sleeping for {SLEEP_TIME} seconds.")
+                    sleep(SLEEP_TIME)
                     continue
                 break

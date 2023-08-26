@@ -5,6 +5,7 @@ class RedditPostRepository:
         self.es_client = es_client
 
     def store(self, target_index, post):
+        print(".", end="", flush=True)
         document = {
             "author_name": post.author.name if post.author else "",
             "author_flair": post.author_flair_text,
