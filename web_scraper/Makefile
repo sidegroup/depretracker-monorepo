@@ -12,3 +12,6 @@ web-scraper-bash:
 
 down:
 	$(dc) down
+
+run:
+	$(dc) run --rm web_scraper python3 main.py
