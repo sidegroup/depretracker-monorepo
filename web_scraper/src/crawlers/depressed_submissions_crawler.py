@@ -1,7 +1,7 @@
-from web_scraper.src.crawlers.reddit_base_crawler import BaseCrawler
+from web_scraper.src.crawlers.reddit_base_crawler import RedditBaseCrawler
 
 
-class DepressedSubmissionsCrawler(BaseCrawler):
+class DepressedSubmissionsCrawler(RedditBaseCrawler):
     SEARCH_STRINGS = [
         'deprê OR ansiedade OR chorar OR morrer OR matar OR medo OR crises OR chorando OR Só OR sozinho OR solidão OR dedolado OR desolado OR morto OR vazio OR suícidio OR surto OR surtei OR surtar OR depressivo OR depressão OR ansioso OR ansiosa OR desespero OR desesperado OR desesperada OR solitário OR melancólico OR desânimo OR tristeza OR depresso OR infeliz OR angustiado OR choro OR cortar OR corte OR culpa OR culpado OR culpando OR deprimido OR desamparado',
         'desanimado OR desmotivado OR doloroso OR dor OR dores OR frustrado OR insonia OR machucado OR morreu OR morte OR noite OR pranto OR pulsos OR punicao OR sangrar OR sangrento OR solidao OR solitario OR sozinho OR suicidar OR suicidas OR suicidio OR tedio OR triste OR desesperança'

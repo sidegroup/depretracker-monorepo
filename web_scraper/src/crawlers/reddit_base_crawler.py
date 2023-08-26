@@ -3,7 +3,7 @@ from ..repositories.reddit_comment_repository import RedditCommentRepository
 from ..services.reddit_service import RedditService
 from ..factories.elastic_search_client import ElasticsearchClientFactory
 
-class BaseCrawler:
+class RedditBaseCrawler:
 
 
     def __init__(self):
