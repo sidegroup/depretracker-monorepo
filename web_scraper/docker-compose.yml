@@ -2,6 +2,8 @@ services:
   es:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     container_name: es
+    volumes:
+      - ./elasticsearch/elastic-data:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - cluster.name=docker-cluster
