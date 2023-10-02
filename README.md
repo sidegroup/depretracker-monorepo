@@ -1,9 +1,11 @@
-# DepreTracker
+# Red Mining
 
-## Projetos
+Conjunto de ferramentas integradas a uma interface web para extração, pre-processamento e análise de dados.
 
-Acesse cada o readme abaixo para entender mais como usar cada um dos projetos.
+Desenvolvido no IFPB - Campus João Pessoa.
 
-- [Sistema de avaliaçao](compare-examples-app/README.md)
-- [Webcrawler](webcrawler/README.md)
-- [scripts](scripts/README.md)
+## Instalação
+
+```bash
+docker-compose up
+```
