@@ -1,0 +1,13 @@
+<% render 'shared/notice' %>
+
+<% content_for :title, t('File Details') %>
+<% content_for :actions do %>
+  <%= link_to t('Back to list'), user_files_path, class: 'btn btn-secondary' %>
+  <%= button_to t('Delete'), user_file_path(@user_file), method: :delete, data: { confirm: t('Are you sure?') }, class: 'btn btn-danger mx-1' %>
+<% end %>
+
+<div class="row">
+  <div class="col">
+    <%= render "form", user_file: @user_file %>
+  </div>
+</div>

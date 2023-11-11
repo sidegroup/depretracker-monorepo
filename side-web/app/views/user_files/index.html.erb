@@ -1,0 +1,19 @@
+<% render 'shared/notice' %>
+
+<% content_for :title, t('Files') %>
+<% content_for :actions do %>
+  <%= link_to t('New file'), new_user_file_path, class: "btn btn-primary" %>
+<% end %>
+
+<div class="row">
+  <div class="col">
+    <div id="user_files">
+      <div class="list-group">
+        <% @user_files.each do |user_file| %>
+          <%= render user_file %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -9,6 +9,26 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/examples">Home</a>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= I18n.t 'Data Mining' %>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item disabled" href="#">Web Crawler - Red Mining</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= I18n.t 'Data Preprocessing' %>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<%= user_files_path %>"><%= t('Files') %></a></li>
+            <li><a class="dropdown-item" href="<%= translations_path %>"><%= t('Translations') %></a></li>
+            <li><a class="dropdown-item" href="<%= examples_path %>"><%= t('Reviews') %></a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>

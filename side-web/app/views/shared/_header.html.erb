@@ -1,5 +1,12 @@
 <div class="row my-5">
-  <div class="col">
-    <h2><%= local_assigns[:title] %></h2>
+  <div class="col-6">
+    <h1 class="display-4">
+      <%= yield :title %>
+    </h1>
+  </div>
+  <div class="col-6">
+    <div class="d-flex justify-content-end align-items-end">
+      <%= yield :actions %>
+    </div>
   </div>
 </div>
