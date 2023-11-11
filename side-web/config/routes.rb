@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
-  resources :user_files
-  resources :examples do
+  resources :translations do
     resources :review, only: [:new, :create] do
     end
   end
 
   resources :user_files do
-
+    member do
+      post :translate
+    end
   end
 
-  resources :translations do
-
-  end
 end

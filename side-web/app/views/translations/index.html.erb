@@ -4,14 +4,14 @@
 <div id="pending_examples">
   <h4>Pendentes</h4>
   <div class="list-group my-3">
-    <% @pending_examples.each do |example| %>
+    <% @pending_translations.each do |example| %>
       <%= render example %>
     <% end %>
   </div>
 
   <%= render partial: 'shared/empty_state',
              locals: {
-               show: @pending_examples.empty?,
+               show: @pending_translations.empty?,
                title: "Não ha traduções pendentes",
                description: "Quando houver, elas aparecerão aqui.",
              } %>
@@ -27,14 +27,14 @@
 <div id="reviewed_examples">
   <h4>Revisadas</h4>
   <div class="list-group my-3">
-    <% @reviewed_examples.each do |example| %>
+    <% @reviewed_translations.each do |example| %>
       <%= render example %>
     <% end %>
   </div>
 
   <%= render partial: 'shared/empty_state',
              locals: {
-               show: @reviewed_examples.empty?,
+               show: @reviewed_translations.empty?,
                title: "Não ha traduções revisadas",
                description: "Quando houver, elas aparecerão aqui.",
              } %>

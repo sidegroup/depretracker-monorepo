@@ -1,5 +1,5 @@
 class UserFilesController < ApplicationController
-  before_action :set_user_file, only: %i[ show edit update destroy ]
+  before_action :set_user_file, only: %i[ show edit update destroy translate ]
 
   # GET /user_files or /user_files.json
   def index
@@ -51,6 +51,15 @@ class UserFilesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_files_url, notice: "User file was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def translate
+    # @user_file = UserFile.find(params[:id])
+    # @user_file.translate
+    respond_to do |format|
+      format.html { redirect_to edit_user_file_url(@user_file), notice: "File translation started." }
+      format.json { head :ok }
     end
   end
 

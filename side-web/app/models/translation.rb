@@ -1,4 +1,4 @@
-class Example < ApplicationRecord
+class Translation < ApplicationRecord
 
   scope :not_reviewed, -> { where(reviewed: false) }
 

@@ -2,7 +2,7 @@ class ReviewController < ApplicationController
   before_action :set_example, only: %i[ new create ]
 
   def new
-    if @example.nil?
+    if @translation.nil?
       flash[:notice] = "Todos as traduções foram revisados."
       redirect_to example_index_path
     end
@@ -14,9 +14,9 @@ class ReviewController < ApplicationController
   end
 
   def create
-    if @example.update(example_params)
-      @example.update!(reviewed: true)
-      @next_example = Example.not_reviewed.first
+    if @translation.update(example_params)
+      @translation.update!(reviewed: true)
+      @next_example = Translation.not_reviewed.first
       flash[:notice] = "Tradução revisada com sucesso."
     else
       flash[:notice] = "Erro ao revisar tradução."
@@ -34,11 +34,11 @@ class ReviewController < ApplicationController
   private
 
   def set_example
-    @example = Example.find(params[:example_id])
+    @translation = Translation.find(params[:example_id])
   end
 
   def example_params
-    params.require(:example).permit(:approved)
+    params.require(:translation).permit(:approved)
   end
 
 end

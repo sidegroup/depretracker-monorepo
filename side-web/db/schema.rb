@@ -42,13 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_211119) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "examples", force: :cascade do |t|
+  create_table "translations", force: :cascade do |t|
     t.boolean "approved"
     t.text "original"
-    t.text "translation"
+    t.text "translated"
+    t.boolean "reviewed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "reviewed", default: false
   end
 
   create_table "user_files", force: :cascade do |t|
