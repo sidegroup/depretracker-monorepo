@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_11_233026) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_233026) do
     t.string "targets", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "file_translation_id", null: false
+    t.index ["file_translation_id"], name: "index_line_translations_on_file_translation_id"
   end
 
   create_table "user_files", force: :cascade do |t|
@@ -69,4 +71,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_233026) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "file_translations", "user_files"
+  add_foreign_key "line_translations", "file_translations"
 end

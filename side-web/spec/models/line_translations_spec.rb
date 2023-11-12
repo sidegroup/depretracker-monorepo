@@ -5,6 +5,10 @@ RSpec.describe LineTranslation, type: :model do
     expect(build(:line_translation)).to be_valid
   end
 
+  describe 'associations' do
+    it { should belong_to(:file_translation)}
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:original_text) }
 

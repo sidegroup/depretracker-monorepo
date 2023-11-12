@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<%= translations_path %>">DepreTracker</a>
+    <a class="navbar-brand" href="<%= line_translations_path %>">DepreTracker</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%= translations_path %>">Home</a>
+          <a class="nav-link active" aria-current="page" href="<%= line_translations_path %>">Home</a>
         </li>
 
         <li class="nav-item dropdown">
@@ -26,7 +26,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="<%= user_files_path %>"><%= t('Files') %></a></li>
             <li><a class="dropdown-item" href="<%= file_translations_path %>"><%= t('File Translation Jobs') %></a></li>
-            <li><a class="dropdown-item" href="<%= translations_path %>"><%= t('Translations') %></a></li>
+            <li><a class="dropdown-item" href="<%= line_translations_path %>"><%= t('Translations') %></a></li>
 <!--            <li><a class="dropdown-item" href="<%#= translation_path %>"><%#= t('Reviews') %></a></li>-->
           </ul>
         </li>

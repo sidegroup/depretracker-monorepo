@@ -1,9 +1,16 @@
 class LineTranslation < ApplicationRecord
+  # Associations
+  belongs_to :file_translation
+
+  # Scopes
   scope :not_reviewed, -> { where(reviewed: false) }
   scope :reviewed, -> { where(reviewed: true) }
 
+  # Enums
+  enum status: { pending: 0, approved: 1, rejected: 2 }
   enum separators: { comma: ',', semicolon: ';' }
 
+  # Validations
   validates_presence_of :original_text
   validates_presence_of :separator, if: -> { targets? }
   validates :separator, inclusion: { in: separators.values }, if: :targets?
