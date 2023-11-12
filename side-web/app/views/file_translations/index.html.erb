@@ -1,14 +1,19 @@
-<p style="color: green"><%= notice %></p>
+<%= render 'shared/notice' %>
 
-<h1>File translations</h1>
+<% content_for :title, t('File Translation Jobs') %>
+<% content_for :actions do %>
+  <%= link_to t('New file'), new_file_translation_path, class: "btn btn-primary" %>
+<% end %>
 
-<div id="file_translations">
-  <% @file_translations.each do |file_translation| %>
-    <%= render file_translation %>
-    <p>
-      <%= link_to "Show this file translation", file_translation %>
-    </p>
-  <% end %>
+
+<div class="row">
+  <div class="col">
+    <div id="user_files">
+      <div class="list-group">
+        <% @file_translations.each do |file_translation| %>
+          <%= render file_translation %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New file translation", new_file_translation_path %>

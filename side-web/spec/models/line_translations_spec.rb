@@ -6,7 +6,7 @@ RSpec.describe LineTranslation, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:file_translation)}
+    it { should belong_to(:file_translation) }
   end
 
   describe 'validations' do

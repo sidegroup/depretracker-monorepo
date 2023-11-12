@@ -1,5 +1,6 @@
 class FileTranslationsController < ApplicationController
   before_action :set_file_translation, only: %i[ show edit update destroy ]
+  before_action :set_user_file, only: %i[ new create ]
 
   # GET /file_translations or /file_translations.json
   def index
@@ -21,6 +22,7 @@ class FileTranslationsController < ApplicationController
 
   # POST /file_translations or /file_translations.json
   def create
+    raise file_translation_params.inspect
     @file_translation = FileTranslation.new(file_translation_params)
 
     respond_to do |format|
@@ -63,8 +65,12 @@ class FileTranslationsController < ApplicationController
       @file_translation = FileTranslation.find(params[:id])
     end
 
+    def set_user_file
+      @user_file = UserFile.find(params[:user_file_id]) if params[:user_file_id]
+    end
+
     # Only allow a list of trusted parameters through.
     def file_translation_params
-      params.require(:file_translation).permit(:user_file_id)
+      params.require(:file_translation).permit(:user_file_id, :source_language_id, :target_language_id, target_columns: [])
     end
 end

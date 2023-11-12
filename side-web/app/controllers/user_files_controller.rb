@@ -54,15 +54,6 @@ class UserFilesController < ApplicationController
     end
   end
 
-  def translate
-    # @user_file = UserFile.find(params[:id])
-    # @user_file.translate
-    respond_to do |format|
-      format.html { redirect_to edit_user_file_url(@user_file), notice: "File translation started." }
-      format.json { head :ok }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_file

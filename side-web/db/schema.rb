@@ -43,10 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
   end
 
   create_table "file_translations", force: :cascade do |t|
-    t.bigint "user_file_id", null: false
+    t.bigint "original_file_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_file_id"], name: "index_file_translations_on_user_file_id"
+    t.index ["original_file_id"], name: "index_file_translations_on_original_file_id"
   end
 
   create_table "line_translations", force: :cascade do |t|
@@ -70,6 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "file_translations", "user_files"
+  add_foreign_key "file_translations", "user_files", column: "original_file_id"
   add_foreign_key "line_translations", "file_translations"
 end

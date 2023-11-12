@@ -1,6 +1,6 @@
 <%= form_with(model: file_translation) do |form| %>
   <% if file_translation.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(file_translation.errors.count, "error") %> prohibited this file_translation from being saved:</h2>
 
       <ul>
@@ -11,12 +11,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :user_file_id, style: "display: block" %>
-    <%= form.text_field :user_file_id %>
+  <div class="mb-3">
+    <%= form.label :user_file_id, t('Target File'), class: "form-label" %>
+    <%= form.select :user_file_id,
+                    UserFile.all.map { |f| [f.name, f.id] },
+                    { value: @user_file.try(:id), selected: @user_file.try(:id) },
+                    disabled: true,
+                    class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.label :source_language_id, t('Source Language'), class: "form-label" %>
+    <%= form.select :source_language_id,
+                    FileTranslation.languages.map { |l| [l[0], l[1]] },
+                    { value: FileTranslation.languages["English"], selected: FileTranslation.languages["English"]},
+                    class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :target_language_id, t('Target Language'), class: "form-label" %>
+    <%= form.select :target_language_id,
+                    FileTranslation.languages.map { |l| [l[0], l[1]] },
+                    { value: FileTranslation.languages["Portuguese"], selected: FileTranslation.languages["Portuguese"]},
+                    class: "form-select" %>
+  </div>
+
+  <%= render partial: 'column_selector',
+              locals: { form: form, user_file: @user_file }
+  %>
+
+  <div class="d-flex justify-content-between align-items-end">
+    <%= form.submit class: "btn btn-primary ms-auto" %>
   </div>
 <% end %>
