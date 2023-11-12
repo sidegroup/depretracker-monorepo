@@ -1,0 +1,22 @@
+<%= form_with(model: file_translation) do |form| %>
+  <% if file_translation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(file_translation.errors.count, "error") %> prohibited this file_translation from being saved:</h2>
+
+      <ul>
+        <% file_translation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_file_id, style: "display: block" %>
+    <%= form.text_field :user_file_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

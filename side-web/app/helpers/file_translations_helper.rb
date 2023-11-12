@@ -1,0 +1,2 @@
+module FileTranslationsHelper
+end
