@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_161155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,9 +44,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
 
   create_table "file_translations", force: :cascade do |t|
     t.bigint "original_file_id", null: false
+    t.integer "status", default: 0
+    t.bigint "source_language_id", null: false
+    t.bigint "target_language_id", null: false
+    t.string "target_columns", default: [], array: true
+    t.string "separator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["original_file_id"], name: "index_file_translations_on_original_file_id"
+    t.index ["source_language_id"], name: "index_file_translations_on_source_language_id"
+    t.index ["target_language_id"], name: "index_file_translations_on_target_language_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "line_translations", force: :cascade do |t|
@@ -56,9 +69,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
     t.boolean "reviewed"
     t.string "separator"
     t.string "targets", default: [], array: true
+    t.bigint "file_translation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "file_translation_id", null: false
     t.index ["file_translation_id"], name: "index_line_translations_on_file_translation_id"
   end
 
@@ -70,6 +83,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_220834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "file_translations", "languages", column: "source_language_id"
+  add_foreign_key "file_translations", "languages", column: "target_language_id"
   add_foreign_key "file_translations", "user_files", column: "original_file_id"
   add_foreign_key "line_translations", "file_translations"
 end

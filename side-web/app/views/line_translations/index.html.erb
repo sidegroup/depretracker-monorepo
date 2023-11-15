@@ -4,8 +4,8 @@
 <div id="pending_examples">
   <h4>Pendentes</h4>
   <div class="list-group my-3">
-    <% @pending_line_translations.each do |example| %>
-      <%= render example %>
+    <% @pending_line_translations.each do |line_translated| %>
+      <%= render line_translated %>
     <% end %>
   </div>
 
@@ -27,8 +27,8 @@
 <div id="reviewed_examples">
   <h4>Revisadas</h4>
   <div class="list-group my-3">
-    <% @reviewed_line_translations.each do |example| %>
-      <%= render example %>
+    <% @reviewed_line_translations.each do |line_translated| %>
+      <%= render line_translated %>
     <% end %>
   </div>
 

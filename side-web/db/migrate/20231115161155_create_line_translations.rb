@@ -7,6 +7,7 @@ class CreateLineTranslations < ActiveRecord::Migration[7.0]
       t.boolean :reviewed
       t.string :separator
       t.string :targets, array: true, default: []
+      t.references :file_translation, null: false, foreign_key: true
 
       t.timestamps
     end

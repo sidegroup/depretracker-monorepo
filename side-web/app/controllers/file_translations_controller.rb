@@ -1,6 +1,6 @@
 class FileTranslationsController < ApplicationController
   before_action :set_file_translation, only: %i[ show edit update destroy ]
-  before_action :set_user_file, only: %i[ new create ]
+  before_action :set_user_file, except: %i[ index ]
 
   # GET /file_translations or /file_translations.json
   def index
@@ -16,14 +16,13 @@ class FileTranslationsController < ApplicationController
     @file_translation = FileTranslation.new
   end
 
-  # GET /file_translations/1/edit
-  def edit
-  end
-
   # POST /file_translations or /file_translations.json
   def create
-    raise file_translation_params.inspect
-    @file_translation = FileTranslation.new(file_translation_params)
+    @file_translation = FileTranslation.new(
+      file_translation_params.merge(
+        separator: FileTranslation.separators[:comma],
+        )
+    )
 
     respond_to do |format|
       if @file_translation.save
@@ -36,41 +35,18 @@ class FileTranslationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /file_translations/1 or /file_translations/1.json
-  def update
-    respond_to do |format|
-      if @file_translation.update(file_translation_params)
-        format.html { redirect_to file_translation_url(@file_translation), notice: "File translation was successfully updated." }
-        format.json { render :show, status: :ok, location: @file_translation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @file_translation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /file_translations/1 or /file_translations/1.json
-  def destroy
-    @file_translation.destroy
-
-    respond_to do |format|
-      format.html { redirect_to file_translations_url, notice: "File translation was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_file_translation
-      @file_translation = FileTranslation.find(params[:id])
-    end
+  def set_file_translation
+    @file_translation = FileTranslation.find(params[:id])
+  end
 
-    def set_user_file
-      @user_file = UserFile.find(params[:user_file_id]) if params[:user_file_id]
-    end
+  def set_user_file
+    @user_file = @file_translation.original_file if @file_translation
+    @user_file = UserFile.find(params[:user_file_id]) if params[:user_file_id]
+  end
 
-    # Only allow a list of trusted parameters through.
-    def file_translation_params
-      params.require(:file_translation).permit(:user_file_id, :source_language_id, :target_language_id, target_columns: [])
-    end
+  # Only allow a list of trusted parameters through.
+  def file_translation_params
+    params.require(:file_translation).permit(:original_file_id, :source_language_id, :target_language_id, target_columns: [])
+  end
 end

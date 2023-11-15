@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<%= render 'shared/notice' %>
 
-<%= render @file_translation %>
+<% content_for :title, t('File Translation') %>
+<% content_for :actions do %>
+  <%= link_to t('Back to list'), file_translations_path, class: 'btn btn-secondary' %>
+<% end %>
 
-<div>
-  <%= link_to "Edit this file translation", edit_file_translation_path(@file_translation) %> |
-  <%= link_to "Back to file translations", file_translations_path %>
-
-  <%= button_to "Destroy this file translation", @file_translation, method: :delete %>
+<div class="row">
+  <div class="col">
+    <%= render "form", file_translation: @file_translation %>
+  </div>
 </div>
