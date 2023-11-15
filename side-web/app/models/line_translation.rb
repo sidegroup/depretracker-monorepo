@@ -1,10 +1,13 @@
 class LineTranslation < ApplicationRecord
+  # After save
+  after_save :enqueue_translation
+
   # Associations
   belongs_to :file_translation
 
   # Scopes
-  scope :not_reviewed, -> { where(reviewed: false) }
   scope :reviewed, -> { where(reviewed: true) }
+  scope :not_reviewed, -> { where(reviewed: [nil, false]) }
 
   # Enums
   enum status: { pending: 0, approved: 1, rejected: 2 }
@@ -19,5 +22,9 @@ class LineTranslation < ApplicationRecord
   def target_range
     return if targets.all? { |target| target.to_i.between?(0, original_text.split(separator).size-1) }
     errors.add(:targets, "must be within range")
+  end
+
+  def enqueue_translation
+    LineTranslationJob.perform_later(self)
   end
 end

@@ -5,6 +5,15 @@ RSpec.describe LineTranslation, type: :model do
     expect(build(:line_translation)).to be_valid
   end
 
+  describe 'after creation' do
+    let(:line_translation) { build(:line_translation) }
+
+    it 'calls FileTranslationJob' do
+      expect(LineTranslationJob).to receive(:perform_later).with(line_translation)
+      line_translation.save
+    end
+  end
+
   describe 'associations' do
     it { should belong_to(:file_translation) }
   end

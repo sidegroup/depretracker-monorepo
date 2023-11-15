@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :languages
-  resources :line_translations do
+  resources :line_translations, only: [:index] do
     resources :review, only: [:new, :create] do
     end
   end
