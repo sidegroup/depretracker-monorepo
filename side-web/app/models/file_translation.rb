@@ -1,4 +1,7 @@
 class FileTranslation < ApplicationRecord
+  # After create
+  after_create :call_translation_job
+
   # Associations
   belongs_to :original_file, class_name: 'UserFile'
   belongs_to :source_language, class_name: 'Language'
@@ -28,6 +31,10 @@ class FileTranslation < ApplicationRecord
 
     return if target_columns.all? { |column| column.to_i.between?(0, original_file.first_line.split(separator).size-1) }
     errors.add(:target_columns, "must be within range")
+  end
+
+  def call_translation_job
+    FileTranslationJob.perform_later(self)
   end
 
 end

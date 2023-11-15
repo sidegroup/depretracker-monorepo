@@ -5,6 +5,15 @@ RSpec.describe FileTranslation, type: :model do
     expect(build(:file_translation)).to be_valid
   end
 
+  describe 'after creation' do
+    let(:file_translation) { build(:file_translation) }
+
+    it 'calls FileTranslationJob' do
+      expect(FileTranslationJob).to receive(:perform_later).with(file_translation)
+      file_translation.save
+    end
+  end
+
   describe 'relations' do
     it { should belong_to(:original_file).class_name('UserFile') }
     it { should belong_to(:source_language).class_name('Language') }
