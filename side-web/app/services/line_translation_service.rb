@@ -6,7 +6,11 @@ class LineTranslationService
   end
 
   def call
-
+    text_translation = TranslatorClient.translate(
+      "auto",
+      "pt",
+      @line_translation.original_text
+    )
   rescue StandardError => e
 
   end

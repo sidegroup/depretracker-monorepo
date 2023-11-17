@@ -27,4 +27,9 @@ class LineTranslation < ApplicationRecord
   def enqueue_translation
     LineTranslationJob.perform_later(self)
   end
+
+  def target_columns
+    return [] unless targets?
+    original_text.split(separator).values_at(*targets)
+  end
 end
