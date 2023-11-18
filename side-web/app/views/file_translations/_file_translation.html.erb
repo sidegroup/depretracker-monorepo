@@ -2,20 +2,31 @@
   <a href="<%= file_translation_path(file_translation) %>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
       <div class="fw-bold"><%= file_translation.original_file.name %></div>
+      <% case file_translation.status
+         when "Pending" %>
+        <small class='badge bg-secondary rounded-pill'><%= file_translation.status %></small>
+
+      <% when "In Progress" %>
+        <small class='badge bg-primary rounded-pill'><%= file_translation.status %></small>
+
+      <% when "Completed" %>
+        <small class='badge bg-success rounded-pill'><%= file_translation.status %></small>
+
+      <% when "Failed" %>
+        <small class='badge bg-danger rounded-pill'><%= file_translation.status %></small>
+
+      <% end %>
+
+      <small class="badge bg-secondary rounded-pill">
+        <%= file_translation.progress.round(2) %> %
+      </small>
+
+      <small class="badge bg-secondary rounded-pill">
+        <%= file_translation.source_language.name %> to
+        <%= file_translation.target_language.name %>
+      </small>
     </div>
-    <% case file_translation.status
-       when "Pending" %>
-      <small class='badge bg-secondary rounded-pill'><%= file_translation.status %> <%= file_translation.created_at.strftime("%d/%m/%Y") %></small>
 
-    <% when "In Progress" %>
-      <small class='badge bg-primary rounded-pill'><%= file_translation.status %> <%= file_translation.created_at.strftime("%d/%m/%Y") %></small>
-
-    <% when "Completed" %>
-      <small class='badge bg-success rounded-pill'><%= file_translation.status %> <%= file_translation.updated_at.strftime("%d/%m/%Y") %></small>
-
-    <% when "Failed" %>
-      <small class='badge bg-danger rounded-pill'><%= file_translation.status %> <%= file_translation.updated_at.strftime("%d/%m/%Y") %></small>
-
-    <% end %>
+    <%= time_ago_in_words(file_translation.created_at) %>
   </a>
 </div>

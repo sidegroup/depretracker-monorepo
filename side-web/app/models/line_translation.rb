@@ -8,6 +8,9 @@ class LineTranslation < ApplicationRecord
   # Scopes
   scope :reviewed, -> { where(reviewed: true) }
   scope :not_reviewed, -> { where(reviewed: [nil, false]) }
+  scope :translated, -> { where.not(translated_text: nil) }
+  scope :not_translated, -> { where(translated_text: [nil, '']) }
+  scope :with_error, -> { where("translated_text LIKE ?", "%Error%") }
 
   # Enums
   enum status: { pending: 0, approved: 1, rejected: 2 }
@@ -31,5 +34,10 @@ class LineTranslation < ApplicationRecord
   def target_columns
     return [] unless targets?
     original_text.split(separator).values_at(*targets)
+  end
+
+  def reprocess
+    update_column(:translated_text, nil)
+    enqueue_translation
   end
 end

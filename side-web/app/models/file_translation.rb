@@ -37,4 +37,18 @@ class FileTranslation < ApplicationRecord
     FileTranslationJob.perform_later(self)
   end
 
+  def finished_translation?
+    line_translations.count == line_translations.translated.count
+  end
+
+  def notify
+    return unless finished_translation?
+    update(status: FileTranslation.statuses[:'Completed'])
+  end
+
+  def progress
+    return 0 if line_translations.empty?
+    line_translations.translated.count.to_f / line_translations.count.to_f * 100
+  end
+
 end

@@ -1,10 +1,11 @@
 class TranslatorClient
-  def self.ping
-    response = HTTParty.get('http://translator/')
-    response.parsed_response['ping']
+  def self.translate(source, target, text)
+    HTTParty.get(url, query: { source: source, target: target, text: text }).parsed_response
   end
 
-  def self.translate(source, target, text)
-    HTTParty.get("http://translator/translate?source=#{source}&target=#{target}&text=#{text}")
+  private
+
+  def self.url
+    "http://translator/translate"
   end
 end

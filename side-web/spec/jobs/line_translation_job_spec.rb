@@ -11,7 +11,7 @@ RSpec.describe LineTranslationJob, type: :job do
 
       expect_any_instance_of(LineTranslationService).to receive(:call).and_return(true)
 
-      FileTranslationJob.perform_now(line_translation)
+      LineTranslationJob.perform_now(line_translation)
     end
   end
 end
