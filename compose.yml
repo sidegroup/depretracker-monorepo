@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   translator:
-    build: translator
+    build: ./translator
     ports:
       - "5000:80"
     volumes:

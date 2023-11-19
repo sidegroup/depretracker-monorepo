@@ -15,7 +15,6 @@ class LineTranslationService
     end
 
     @line_translation.save!
-    @line_translation.notify
   rescue StandardError => e
     @line_translation.update(translated_text: "Error: #{e.message}")
   end

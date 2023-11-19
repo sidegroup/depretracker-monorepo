@@ -9,7 +9,8 @@ RSpec.describe LineTranslation, type: :model do
     let(:line_translation) { build(:line_translation) }
 
     it 'calls FileTranslationJob' do
-      expect(LineTranslationJob).to receive(:perform_later).with(line_translation)
+      expect(LineTranslationJob).to receive(:perform_later).with(line_translation).once
+      line_translation.save
       line_translation.save
     end
   end

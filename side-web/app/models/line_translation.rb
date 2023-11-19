@@ -1,6 +1,6 @@
 class LineTranslation < ApplicationRecord
   # After save
-  after_save :enqueue_translation
+  after_create :enqueue_translation
 
   # Associations
   belongs_to :file_translation
