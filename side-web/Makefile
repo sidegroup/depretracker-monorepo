@@ -4,17 +4,20 @@ dc := docker compose
 run := ${dc} ${ra}
 exec := ${dc} exec $(target)
 
+up:
+	${dc} up --build
+
 upd:
 	${dc} up -d
 
 down:
 	${dc} down
 
-build:
-	${dc} up --build
+app-build:
+	${dc} build $(target)
 
 app-bundle: upd
-	${exec}
+	${exec} bundle
 
 app-bash: upd
 	${dc} exec $(target) bash
