@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   get 'translate', to: 'translator#get'
 
-  resources :file_translations, only: [:index, :show, :new, :create]
+  resources :file_translations, only: [:index, :show, :new, :create] do
+    member do
+      post 'retry'
+    end
+  end
   resources :user_files
 end

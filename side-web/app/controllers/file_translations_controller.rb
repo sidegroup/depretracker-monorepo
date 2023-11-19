@@ -1,5 +1,5 @@
 class FileTranslationsController < ApplicationController
-  before_action :set_file_translation, only: %i[ show edit update destroy ]
+  before_action :set_file_translation, only: %i[ show edit update destroy retry]
   before_action :set_user_file, except: %i[ index ]
 
   # GET /file_translations or /file_translations.json
@@ -33,6 +33,10 @@ class FileTranslationsController < ApplicationController
         format.json { render json: @file_translation.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def retry
+    @file_translation.retry_failed_lines
   end
 
   private

@@ -3,7 +3,7 @@ class LineTranslation < ApplicationRecord
   after_create :enqueue_translation
 
   # Associations
-  belongs_to :file_translation
+  belongs_to :file_translation, class_name: 'FileTranslation'
 
   # Scopes
   scope :reviewed, -> { where(reviewed: true) }

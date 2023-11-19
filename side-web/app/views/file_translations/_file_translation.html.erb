@@ -18,7 +18,11 @@
       <% end %>
 
       <small class="badge bg-secondary rounded-pill">
-        <%= file_translation.progress.round(2) %> %
+        <%= file_translation.progress.round(2) %>%
+      </small>
+
+      <small class="badge bg-warning rounded-pill"  <%= 'hidden' if file_translation.failed_lines_percentage.zero? %>>
+        <%= file_translation.failed_lines_percentage %>% failed
       </small>
 
       <small class="badge bg-secondary rounded-pill">

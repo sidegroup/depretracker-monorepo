@@ -6,7 +6,7 @@ class FileTranslation < ApplicationRecord
   belongs_to :original_file, class_name: 'UserFile'
   belongs_to :source_language, class_name: 'Language'
   belongs_to :target_language, class_name: 'Language'
-  has_many :line_translations, dependent: :destroy
+  has_many :line_translations, dependent: :destroy, class_name: 'LineTranslation'
 
   # Enums
   enum status: {
@@ -37,6 +37,12 @@ class FileTranslation < ApplicationRecord
     FileTranslationJob.perform_later(self)
   end
 
+  def retry_failed_lines
+    line_translations.with_error.each do |line_translation|
+      line_translation.reprocess
+    end
+  end
+
   def finished_translation?
     line_translations.count == line_translations.translated.count
   end
@@ -48,6 +54,15 @@ class FileTranslation < ApplicationRecord
   def progress
     return 0 if line_translations.empty?
     line_translations.translated.count.to_f / line_translations.count.to_f * 100
+  end
+
+  def failed_lines
+    line_translations.with_error
+  end
+
+  def failed_lines_percentage
+    return 0 if line_translations.empty?
+    line_translations.with_error.count.to_f / line_translations.count.to_f * 100
   end
 
   def update_progress
