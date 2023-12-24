@@ -30,8 +30,11 @@ module UserFilesHelper
     file_path = user_file.path
     delimiter = file_delimiter(user_file)
     lines = CSV.read(file_path, col_sep: delimiter)
-    lines.map do
-      |line| line.map { |cell| cell.strip.gsub("\n", ' ') }
+
+    lines.map do |line|
+      line.map do |cell|
+        cell&.strip&.gsub("\n", ' ')
+      end
     end
   end
 end
