@@ -2,8 +2,8 @@
 <table class="table table-bordered">
   <thead>
   <tr class="table-dark">
-    <th scope="col">Lines</th>
-    <% @user_file&.first_line&.split(",")&.each_with_index do |column, index| %>
+    <th scope="col">#</th>
+    <% file_header(@user_file)&.each_with_index do |column, index| %>
       <th scope="col">
         <%= form.check_box :target_columns, { class: 'form-check-input', multiple: true }, index, false %>
         <%= form.label :"target_columns_#{index}", column, class: 'form-check-label' %>
@@ -13,11 +13,11 @@
   </tr>
   </thead>
   <tbody>
-  <% @user_file&.second_to_n_line(3)&.each_with_index do |column, index| %>
+  <% file_rows(@user_file).each_with_index do |row, index| %>
     <tr>
       <th scope="row"><%= index %></th>
-      <% column.split(",").each do |value| %>
-        <td><%= truncate(value, length: 60) %></td>
+      <% row.each do |column| %>
+        <td><%= truncate(column, length: 60) %></td>
       <% end %>
     </tr>
   <% end %>
