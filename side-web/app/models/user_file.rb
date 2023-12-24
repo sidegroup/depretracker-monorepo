@@ -14,4 +14,8 @@ class UserFile < ApplicationRecord
   def second_to_n_line(n)
     self.attachment.download.lines.drop(1).first(n)
   end
+
+  def path
+    ActiveStorage::Blob.service.path_for attachment.key
+  end
 end
