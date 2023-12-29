@@ -30,14 +30,39 @@ services:
       - es
 
   web_scraper:
+
+    stdin_open: true
+    
     build:
       context: .
       dockerfile: Dockerfile
+
+    ports:
+      - 5000:5000
+
     volumes:
       - .:/web_scraper
+
     depends_on:
       - es
       - kibana
+
+  web_scrapper_interface:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: react
+
+    volumes:
+      - ./webscrapper-interface:/home/app
+
+    ports:
+      - 3000:3000
+    
+    depends_on:
+      - es
+      - kibana
+      - web_scraper
 
 networks:
   default:

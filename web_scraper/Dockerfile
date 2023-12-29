@@ -11,3 +11,5 @@ COPY requirements.txt /web_scraper
 RUN pip install -r requirements.txt
 
 COPY . /web_scraper
+
+CMD ["/bin/bash", "-c", "python3 main.py"]

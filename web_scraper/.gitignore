@@ -3,3 +3,6 @@
 .idea
 *.pyc
 esdata1/*
+node_modules
+package-lock.json
+credenciais.txt

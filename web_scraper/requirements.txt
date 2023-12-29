@@ -17,3 +17,4 @@ tzdata==2023.3
 update-checker==0.18.0
 urllib3==1.26.16
 websocket-client==1.6.0
+Flask
