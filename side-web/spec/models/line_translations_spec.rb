@@ -9,7 +9,8 @@ RSpec.describe LineTranslation, type: :model do
     let(:line_translation) { build(:line_translation) }
 
     it 'calls FileTranslationJob' do
-      expect(LineTranslationJob).to receive(:perform_later).with(line_translation).once
+      expect(LineTranslationJob).to receive(:set).with(wait: line_translation.batch_number.minutes + 1.seconds).and_return(LineTranslationJob)
+      expect(LineTranslationJob).to receive(:perform_later).with(line_translation)
       line_translation.save
       line_translation.save
     end
@@ -26,6 +27,7 @@ RSpec.describe LineTranslation, type: :model do
       subject { build(:line_translation, targets: [1, 2]) }
 
       it { should validate_presence_of(:separator) }
+      it { should validate_presence_of(:batch_number) }
       it { is_expected.to validate_inclusion_of(:separator).in_array(LineTranslation.separators.values) }
       it 'should have a valid separator' do
         expect(build(:line_translation, targets: [0], separator: ',')).to be_valid

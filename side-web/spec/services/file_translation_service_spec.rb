@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe FileTranslationService, type: :service do
   subject { described_class.new(file_translation) }
 
-  let!(:file_translation) { create(:file_translation) }
+  let!(:file_translation) { build(:file_translation) }
 
   describe '#call' do
     context 'when file_translation is valid' do

@@ -18,6 +18,7 @@ class LineTranslation < ApplicationRecord
 
   # Validations
   validates_presence_of :original_text
+  validates_presence_of :batch_number
   validates_presence_of :separator, if: -> { targets? }
   validates :separator, inclusion: { in: separators.values }, if: :targets?
   validate :target_range, if: :separator?
@@ -28,7 +29,9 @@ class LineTranslation < ApplicationRecord
   end
 
   def enqueue_translation
-    LineTranslationJob.perform_later(self)
+    LineTranslationJob
+      .set(wait: batch_number.minutes + 1.seconds)
+      .perform_later(self)
   end
 
   def target_columns
