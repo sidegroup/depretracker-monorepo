@@ -46,7 +46,9 @@
 
   <div class="row my-5 justify-content-center">
     <div class="col-2">
-      <%= form.submit "Submeter avaliação", class: "btn btn-primary btn-large" %>
+      <button type="submit" class="btn btn-primary btn-large" onclick="this.disabled=true;this.form.submit();">
+        Submeter avaliação
+      </button>
     </div>
   </div>
 <% end %>
