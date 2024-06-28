@@ -30,3 +30,6 @@ app-rspec: upd
 
 app-migrate: upd
 	${dc} exec $(target) rails db:migrate
+
+app-seed: upd
+	${dc} exec $(target) rails db:seed
