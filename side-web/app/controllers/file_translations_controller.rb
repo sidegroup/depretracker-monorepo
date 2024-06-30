@@ -1,5 +1,5 @@
 class FileTranslationsController < ApplicationController
-  before_action :set_file_translation, only: %i[ show edit update destroy retry]
+  before_action :set_file_translation, only: %i[ show edit update destroy retry download]
   before_action :set_user_file, except: %i[ index ]
 
   # GET /file_translations or /file_translations.json
@@ -39,9 +39,31 @@ class FileTranslationsController < ApplicationController
     @file_translation.retry_failed_lines
   end
 
+  def download
+    csv = CSV.generate do |csv|
+      @file_translation.line_translations.each do |translation|
+        csv << [translation.translated_text]
+      end
+    end
+
+    csv_file = Tempfile.new('translation')
+    csv_file.write(csv)
+    csv_file.rewind
+    csv_file.close
+
+    send_file csv_file.path, type: 'text/csv', filename: translation_file_name
+  end
+
   private
   def set_file_translation
     @file_translation = FileTranslation.find(params[:id])
+  end
+
+  def translation_file_name
+    original_file = @file_translation.original_file.name.split('.').first
+    target_language = @file_translation.target_language.name.downcase
+
+    "#{original_file}_#{target_language}.csv"
   end
 
   def set_user_file
