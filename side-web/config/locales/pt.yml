@@ -1,9 +1,17 @@
+---
 pt:
-  Data Mining: "Mineração de Dados"
-  Data Preprocessing: "Pré-processamento de Dados"
-  Translations: "Traduções"
-  Reviews: "Revisões"
-  File Translation Jobs: "Traduçao de arquivos"
-  Review Translations: "Revisar traduçoes"
-  Retry: "Reprocessar"
-  Back to list: "Voltar para lista"
+  Back to list: Retornar
+  Data Mining: Mineração de Dados
+  Data Preprocessing: Pré-processamento de Dados
+  Delete: Deletar
+  File Translation Jobs: Tradução de arquivos
+  Files: Arquivos
+  New file: Novo Arquivo
+  Parameters: Parametros
+  Retry: Reprocessar
+  Review Translations: Revisar traduções
+  Reviews: Revisões
+  Total: Total
+  Translations: Traduções
+  File Details: Detalhes do arquivo
+  Translate File: Traduzir arquivo 
