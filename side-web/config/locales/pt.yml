@@ -7,6 +7,7 @@ pt:
   File Translation Jobs: Tradução de arquivos
   File Translation: Tradução de arquivos
   Files: Arquivos
+  Review Translation: Rever Tradução
   New file: Novo Arquivo
   Parameters: Parametros
   Retry: Reprocessar
@@ -25,6 +26,12 @@ pt:
   Are you sure?: Tem certeza? 
   datetime:
     distance_in_words:
+      about_x_hours:
+        one: "Aproximadamente 1 hora"
+        other: "Aproximadamente %{count} horas"
+      less_than_x_minutes:
+        one: "Menos de 1 minuto"
+        other: "Menos de %{count} minutos"
       x_minutes:
         one: "1 minuto"
         other: "%{count} minutos"

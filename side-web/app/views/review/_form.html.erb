@@ -33,22 +33,36 @@
   </div>
 
   <div class="row my-5 justify-content-center">
-    <div class="col-2">
-      <%= form.radio_button :approved, 'false', class: 'btn-check' %>
-      <%= form.label :approved, 'Reprovado', for: 'line_translation_approved_false', class: 'btn btn-outline-secondary w-100' %>
-    </div>
-    <div class="col-2">
-      <%= form.radio_button :approved, 'true', class: 'btn-check', required: :required %>
-      <%= form.label :approved, 'Aprovado', for: 'line_translation_approved_true', class: 'btn btn-outline-primary w-100' %>
-    </div>
+  <div class="col-2">
+    <%= form.radio_button :approved, 'false', class: 'btn-check', id: 'line_translation_approved_false' %>
+    <%= form.label :approved, 'Reprovado', for: 'line_translation_approved_false', class: 'btn btn-outline-secondary w-100 reprovado' %>
   </div>
+  <div class="col-2">
+    <%= form.radio_button :approved, 'true', class: 'btn-check', id: 'line_translation_approved_true', required: :required %>
+    <%= form.label :approved, 'Aprovado', for: 'line_translation_approved_true', class: 'btn btn-outline-primary w-100 aprovado' %>
   </div>
+</div>
 
-  <div class="row my-5 justify-content-center">
-    <div class="col-2">
-      <button type="submit" class="btn btn-primary btn-large" onclick="this.disabled=true;this.form.submit();">
-        Submeter avaliação
-      </button>
-    </div>
+<div class="row my-5 justify-content-center">
+  <div class="col-2">
+    <button type="submit" id="submit-button" class="btn btn-primary btn-large" onclick="this.disabled=false;this.form.submit();">
+      Submeter avaliação
+    </button>
   </div>
+</div>
+
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.getElementById("submit-button");
+    const radioButtons = document.querySelectorAll('input[name="line_translation[approved]"]');
+
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', function() {
+        submitButton.disabled = false;
+      });
+    });
+  });
+</script>
+
