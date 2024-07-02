@@ -5,6 +5,7 @@ pt:
   Data Preprocessing: Pré-processamento de Dados
   Delete: Deletar
   File Translation Jobs: Tradução de arquivos
+  File Translation: Tradução de arquivos
   Files: Arquivos
   New file: Novo Arquivo
   Parameters: Parametros
@@ -15,3 +16,18 @@ pt:
   Translations: Traduções
   File Details: Detalhes do arquivo
   Translate File: Traduzir arquivo 
+  Target File: Arquivo de destino
+  Source Language: Idioma original 
+  Target Language: Idioma alvo
+  Select Target Columns to Translate: Selecione colunas para traduzir 
+  Retry failed lines: Tente novamente 
+  Total: Total
+  Are you sure?: Tem certeza? 
+  datetime:
+    distance_in_words:
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      x_hours:
+        one: "1 hora"
+        other: "%{count} horas"
