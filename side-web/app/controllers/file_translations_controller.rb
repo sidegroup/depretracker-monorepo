@@ -42,7 +42,9 @@ class FileTranslationsController < ApplicationController
   def download
     csv = CSV.generate do |csv|
       @file_translation.line_translations.each do |translation|
-        csv << [translation.translated_text]
+        if translation.approved == true
+          csv << [translation.translated_text]
+        end
       end
     end
 
