@@ -39,3 +39,18 @@ pt:
       x_hours:
         one: "1 hora"
         other: "%{count} horas"
+      x_days:
+        one: "1 dia"
+        other: "%{count} dias"
+      x_months:
+        one: "1 mês"
+        other: "%{count} meses"
+      x_years:
+        one: "1 ano"
+        other: "%{count} anos"
+  views:
+    pagination:
+      first: "Primeira"
+      previous: "Anterior"
+      next: "Próxima"
+      last: "Última"
