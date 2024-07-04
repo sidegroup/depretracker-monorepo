@@ -3,6 +3,7 @@
   <div class="d-flex w-100 justify-content-between ">
     <%= line_translation.original_text.truncate(100) %>
 
+    <%= line_translation.file_translation.original_file.name %>
     <% if line_translation.reviewed %>
       <% if line_translation.approved %>
         <span class="badge rounded-pill bg-primary">Aprovado</span>
