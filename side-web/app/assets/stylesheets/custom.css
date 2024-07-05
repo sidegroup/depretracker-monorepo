@@ -45,20 +45,15 @@
     color: #ffff; 
 }
 
-.paginacao ul {
+nav {
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: center;
 }
 
-.paginacao ul li {
+nav > span {
+    display: inline-block;
     margin-right: 1rem;
-}
-
-.paginacao ul li a,
-.paginacao ul li span {
-    display: block;
     padding: 0.5rem 1rem;
     text-decoration: none;
     color: #333;
@@ -67,14 +62,14 @@
     transition: background-color 0.3s ease;
 }
 
-.paginacao ul li.active a,
-.paginacao ul li.active span {
+nav > span:hover {
+    background-color: #f0f0f0;
+}
+
+nav > span > a.active,
+nav > span > a:focus {
     background-color: #007bff;
     color: #fff;
     border-color: #007bff;
-}
-
-.paginacao ul li a:hover,
-.paginacao ul li span:hover {
-    background-color: #f0f0f0;
+    outline: none; /* Remove a borda ao focar */
 }
