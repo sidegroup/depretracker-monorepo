@@ -1,16 +1,22 @@
 <%= render 'shared/notice' %>
 <%= content_for :title, t('Review Translations') %>
 
-<div id="pending_examples">
+<div id="pending_examples" class='csv'>
   <h4>Pendentes</h4>
   <div class="list-group my-3">
-    <% if @pending_line_translations.any? %>
-      <% @pending_line_translations.each do |line_translated| %>
-        <%= render line_translated %>
+    <% if !@lines_pending_review_by_file.empty? %>
+      <% @lines_pending_review_by_file.each do |k,v| %>
+        <% if !v.empty? %>
+          <h3>
+            Nome do Arquivo: <%= k %>
+          </h3>
+          <ul>
+            <% v.each do |line_translated| %>
+              <%= render line_translated %>
+            <% end %>
+          </ul>
+        <% end %>
       <% end %>
-    </div>
-    <div class="paginacao">
-      <%= paginate @pending_line_translations %>
     </div>
   <% else %>
     <%= render partial: 'shared/empty_state',
@@ -27,17 +33,24 @@
   </div>
 </div>
 
-<div id="reviewed_examples">
+<div id="reviewed_examples" class='csv'>
   <h4>Revisadas</h4>
   <div class="list-group my-3">
-    <% if @reviewed_line_translations.any? %>
-      <% @reviewed_line_translations.each do |line_translated| %>
-        <%= render line_translated %>
+    <% if !@lines_review_by_file.empty? %>
+      <% @lines_review_by_file.each do |k,v| %>
+        <% if !v.empty? %>
+          <h3>
+            Nome do Arquivo: <%= k %>
+          </h3>
+          <ul>
+            <% v.each do |line_translated| %>
+              <%= render line_translated %>
+            <% end %>
+          </ul>
+        <% end %>
       <% end %>
     </div>
-    <div class="paginacao">
-      <%= paginate @reviewed_line_translations %>
-    </div>
+  
   <% else %>
     <%= render partial: 'shared/empty_state',
                locals: {
