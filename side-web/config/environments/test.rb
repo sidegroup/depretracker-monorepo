@@ -57,4 +57,10 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+   # Default locale for translation.
+   config.i18n.default_locale = :pt
+
+   # Enable fallbacks to default locale.
+   config.i18n.fallbacks = true
 end

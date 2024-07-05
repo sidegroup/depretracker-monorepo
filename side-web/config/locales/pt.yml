@@ -1,9 +1,56 @@
+---
 pt:
-  Data Mining: "Mineração de Dados"
-  Data Preprocessing: "Pré-processamento de Dados"
-  Translations: "Traduções"
-  Reviews: "Revisões"
-  File Translation Jobs: "Traduçao de arquivos"
-  Review Translations: "Revisar traduçoes"
-  Retry: "Reprocessar"
-  Back to list: "Voltar para lista"
+  Back to list: Retornar
+  Data Mining: Mineração de Dados
+  Data Preprocessing: Pré-processamento de Dados
+  Delete: Deletar
+  File Translation Jobs: Tradução de arquivos
+  File Translation: Tradução de arquivos
+  Files: Arquivos
+  Review Translation: Rever Tradução
+  Download: Download
+  New file: Novo Arquivo
+  Parameters: Parametros
+  Retry: Reprocessar
+  Review Translations: Revisar traduções
+  Reviews: Revisões
+  Total: Total
+  Translations: Traduções
+  File Details: Detalhes do arquivo
+  Translate File: Traduzir arquivo 
+  Target File: Arquivo de destino
+  Source Language: Idioma original 
+  Target Language: Idioma alvo
+  Select Target Columns to Translate: Selecione colunas para traduzir 
+  Retry failed lines: Tente novamente 
+  Total: Total
+  Are you sure?: Tem certeza? 
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "Aproximadamente 1 hora"
+        other: "Aproximadamente %{count} horas"
+      less_than_x_minutes:
+        one: "Menos de 1 minuto"
+        other: "Menos de %{count} minutos"
+      x_minutes:
+        one: "1 minuto"
+        other: "%{count} minutos"
+      x_hours:
+        one: "1 hora"
+        other: "%{count} horas"
+      x_days:
+        one: "1 dia"
+        other: "%{count} dias"
+      x_months:
+        one: "1 mês"
+        other: "%{count} meses"
+      x_years:
+        one: "1 ano"
+        other: "%{count} anos"
+  views:
+    pagination:
+      first: "Primeira"
+      previous: "Anterior"
+      next: "Próxima"
+      last: "Última"

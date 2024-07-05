@@ -1,8 +1,75 @@
 .link-clean {
     text-decoration: none;
-    color: #000;
+    color: #ffff;
     &:hover {
         text-decoration: none;
-        color: #000;
+        color: #ffff;
     }
+}
+
+.navbar {
+    background-color: #007BA7; /* Fundo cinza claro */
+    padding: 10px 20px;
+    border-radius: 0; 
+    margin: 0 10px;
+}
+
+
+.navbar-nav .nav-link {
+    color: #ffff; 
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+
+.navbar-nav .nav-link:hover {
+    background-color: #3AA8C1; 
+    color: #ffff; 
+    border-radius: 5px;
+}
+
+
+.link-clean {
+    text-decoration: none;
+    color: #ffff;
+}
+
+.link-clean:hover {
+    background-color: #3AA8C1; 
+    color: #ffff;
+    border-radius: 5px; 
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #007BA7; 
+    color: #ffff; 
+}
+
+nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+nav > span {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav > span:hover {
+    background-color: #f0f0f0;
+}
+
+nav > span > a.active,
+nav > span > a:focus {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    outline: none; /* Remove a borda ao focar */
 }

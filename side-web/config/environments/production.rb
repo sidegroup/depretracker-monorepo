@@ -90,4 +90,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+   # Default locale for translation.
+   config.i18n.default_locale = :pt
+
+   # Enable fallbacks to default locale.
+   config.i18n.fallbacks = true
 end
