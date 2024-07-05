@@ -4,51 +4,47 @@
 <div id="pending_examples">
   <h4>Pendentes</h4>
   <div class="list-group my-3">
-    <% if @pending_line_translations.any? %>
-      <% @pending_line_translations.each do |line_translated| %>
-        <%= render line_translated %>
-      <% end %>
-    </div>
-    <div class="paginacao">
-      <%= paginate @pending_line_translations %>
-    </div>
-  <% else %>
-    <%= render partial: 'shared/empty_state',
-               locals: {
-                 show: true,
-                 title: "Não há traduções pendentes",
-                 description: "Quando houver, elas aparecerão aqui.",
-               } %>
-  <% end %>
-</div>
-
-<div class="row my-5 justify-content-center">
-  <div class="col-6">
+    <% @pending_line_translations.each do |line_translated| %>
+      <%= render line_translated %>
+    <% end %>
   </div>
-</div>
 
-<div id="reviewed_examples">
-  <h4>Revisadas</h4>
-  <div class="list-group my-3">
-    <% if @reviewed_line_translations.any? %>
+  <%= render partial: 'shared/empty_state',
+             locals: {
+               show: @pending_line_translations.empty?,
+               title: "Não ha traduções pendentes",
+               description: "Quando houver, elas aparecerão aqui.",
+             } %>
+
+
+  <% @lines_pending_review_by_file.each do |lines_translated_of_file| %>
+    <h5 class="mt-5"><%= lines_translated_of_file.first.original_file.name %></h5>
+    <div class="list-group my-3">
+      <% lines_translated_of_file.each do |line_translated| %>
+        <%= line_translated. %>
+      <% end %>
+  <% end %>
+  </div>
+
+  <div class="row my-5 justify-content-center">
+    <div class="col-6">
+      <hr>
+    </div>
+  </div>
+
+  <div id="reviewed_examples">
+    <h4>Revisadas</h4>
+    <div class="list-group my-3">
       <% @reviewed_line_translations.each do |line_translated| %>
         <%= render line_translated %>
       <% end %>
     </div>
-    <div class="paginacao">
-      <%= paginate @reviewed_line_translations %>
-    </div>
-  <% else %>
+
     <%= render partial: 'shared/empty_state',
                locals: {
-                 show: true,
-                 title: "Não há traduções revisadas",
+                 show: @reviewed_line_translations.empty?,
+                 title: "Não ha traduções revisadas",
                  description: "Quando houver, elas aparecerão aqui.",
                } %>
-  <% end %>
-</div>
-
-<div class="row my-5 justify-content-center">
-  <div class="col-6">
   </div>
-</div>
+
