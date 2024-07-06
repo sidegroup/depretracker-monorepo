@@ -33,3 +33,6 @@ app-migrate: upd
 
 app-seed: upd
 	${dc} exec $(target) rails db:seed
+
+app-create-db: upd
+	${dc} exec $(target) rails db:create
