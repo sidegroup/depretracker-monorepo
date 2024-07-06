@@ -1,24 +1,20 @@
 <%= render 'shared/notice' %>
 
-<% content_for :title, t('File Translation') %>
+<% content_for :title do %>
+  <span class="title-small"><%= t('Translated dataset details') %></span>
+<% end %>
 <% content_for :actions do %>
   <%= link_to t('Back to list'), file_translations_path, class: 'btn btn-secondary' %>
-  <%= button_to t('Retry failed lines'), retry_file_translation_path(@file_translation), method: :post, data: { confirm: t('Are you sure?') }, class: 'btn btn-primary mx-1' %>
-  <%= link_to t('Download'), download_file_translation_path(@file_translation), class: 'btn btn-primary mx-1' %>
 <% end %>
-
 
 <div class="row">
   <div class="col">
-    <hr>
-    <h2><%=  t('Parameters') %></h2>
-    <%= render "form", file_translation: @file_translation %>
+    <h2><%= t('Parameters') %></h2>
+    <%= render "form", file_translation: @file_translation, readonly_mode: true %>
   </div>
 </div>
 
-
 <% unless @file_translation.failed_lines.empty? %>
-
   <div class="row">
     <div class="col">
       <hr>
@@ -29,9 +25,8 @@
         </small>
       </h2>
 
-
       <% @file_translation.failed_lines.each do |line| %>
-        <%= render 'line_translations/line_translation', line_translation: line %>
+        <%= render 'line_translations/line_translation', line_translation: line, readonly_mode: true %>
       <% end %>
     </div>
   </div>

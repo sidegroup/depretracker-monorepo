@@ -1,8 +1,11 @@
 <%= render 'shared/notice' %>
 
-<% content_for :title, t('Files') %>
+<% content_for :title do %>
+  <span class="title-small"><%= t('Input dataset') %></span>
+<% end %>
+
 <% content_for :actions do %>
-  <%= link_to t('New file'), new_user_file_path, class: "btn btn-primary" %>
+  <%= link_to t('New set'), new_user_file_path, class: "btn btn-primary" %>
 <% end %>
 
 <div class="row">
@@ -16,4 +19,5 @@
     </div>
   </div>
 </div>
+
 

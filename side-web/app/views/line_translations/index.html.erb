@@ -1,15 +1,16 @@
 <%= render 'shared/notice' %>
-<%= content_for :title, t('Review Translations') %>
 
-<div id="pending_examples" class='csv'>
+<% content_for :title do %>
+  <span class="title-small"><%= t('Review Translations') %></span>
+<% end %>
+
+<div id="pending_examples" class="csv">
   <h4>Pendentes</h4>
   <div class="list-group my-3">
     <% if !@lines_pending_review_by_file.empty? %>
-      <% @lines_pending_review_by_file.each do |k,v| %>
+      <% @lines_pending_review_by_file.each do |k, v| %>
         <% if !v.empty? %>
-          <h3>
-            Nome do Arquivo: <%= k %>
-          </h3>
+          <h3>Nome do Arquivo: <%= k %></h3>
           <ul>
             <% v.each do |line_translated| %>
               <%= render line_translated %>
@@ -17,31 +18,30 @@
           </ul>
         <% end %>
       <% end %>
-    </div>
-  <% else %>
-    <%= render partial: 'shared/empty_state',
-               locals: {
-                 show: true,
-                 title: "Não há traduções pendentes",
-                 description: "Quando houver, elas aparecerão aqui.",
-               } %>
-  <% end %>
+    <% else %>
+      <%= render partial: 'shared/empty_state',
+                 locals: {
+                   show: true,
+                   title: "Não há traduções pendentes",
+                   description: "Quando houver, elas aparecerão aqui."
+                 } %>
+    <% end %>
+  </div>
 </div>
 
 <div class="row my-5 justify-content-center">
   <div class="col-6">
+    <!-- Conteúdo da coluna 6 -->
   </div>
 </div>
 
-<div id="reviewed_examples" class='csv'>
+<div id="reviewed_examples" class="csv">
   <h4>Revisadas</h4>
   <div class="list-group my-3">
     <% if !@lines_review_by_file.empty? %>
-      <% @lines_review_by_file.each do |k,v| %>
+      <% @lines_review_by_file.each do |k, v| %>
         <% if !v.empty? %>
-          <h3>
-            Nome do Arquivo: <%= k %>
-          </h3>
+          <h3>Nome do Arquivo: <%= k %></h3>
           <ul>
             <% v.each do |line_translated| %>
               <%= render line_translated %>
@@ -49,19 +49,20 @@
           </ul>
         <% end %>
       <% end %>
-    </div>
-  
-  <% else %>
-    <%= render partial: 'shared/empty_state',
-               locals: {
-                 show: true,
-                 title: "Não há traduções revisadas",
-                 description: "Quando houver, elas aparecerão aqui.",
-               } %>
-  <% end %>
+    <% else %>
+      <%= render partial: 'shared/empty_state',
+                 locals: {
+                   show: true,
+                   title: "Não há traduções revisadas",
+                   description: "Quando houver, elas aparecerão aqui."
+                 } %>
+    <% end %>
+  </div>
 </div>
 
 <div class="row my-5 justify-content-center">
   <div class="col-6">
+    <!-- Conteúdo da coluna 6 -->
   </div>
 </div>
+

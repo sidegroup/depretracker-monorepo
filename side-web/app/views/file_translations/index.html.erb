@@ -1,21 +1,24 @@
-<link 
 <%= render 'shared/notice' %>
 
-<% content_for :title, t('File Translation Jobs') %>
-
+<% content_for :title do %>
+  <span class="title-small"><%= t('Translated data collection') %></span>
+<% end %>
 
 <div class="row">
   <div class="col">
     <div id="user_files" class="p-3">
       <div class="list-group">
         <% @file_translations.each do |file_translation| %>
-          <div class="list-group-item mb-3 border-0">
-            <%= render file_translation %>
+          <div class="list-group-item mb-3 border-0 file-container d-flex justify-content-between align-items-center">
+            <div class="file-info">
+              <%= render file_translation %>
+            </div>
+            <div class="file-action">
+              <%= link_to t('Download'), download_file_translation_path(file_translation), class: 'btn btn-primary' %>
+            </div>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-

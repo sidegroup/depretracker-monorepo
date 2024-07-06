@@ -1,10 +1,19 @@
 .link-clean {
     text-decoration: none;
     color: #ffff;
-    &:hover {
-        text-decoration: none;
-        color: #ffff;
-    }
+}
+
+/* Ensure navbar brand and nav links are the same color */
+.navbar-brand, .nav-link {
+    color: #ffff !important;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #f8f9fa !important; /* Example of a hover effect */
+    background-color: #3AA8C1;
+    border-radius: 5px;
 }
 
 .navbar {
@@ -12,32 +21,6 @@
     padding: 10px 20px;
     border-radius: 0; 
     margin: 0 10px;
-}
-
-
-.navbar-nav .nav-link {
-    color: #ffff; 
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-
-.navbar-nav .nav-link:hover {
-    background-color: #3AA8C1; 
-    color: #ffff; 
-    border-radius: 5px;
-}
-
-
-.link-clean {
-    text-decoration: none;
-    color: #ffff;
-}
-
-.link-clean:hover {
-    background-color: #3AA8C1; 
-    color: #ffff;
-    border-radius: 5px; 
 }
 
 .navbar-nav .dropdown-menu .dropdown-item:hover {
@@ -74,7 +57,6 @@ nav > span > a:focus {
     outline: none; 
 }
 
-
 .csv {
     margin-top: 20px;
     padding: 20px;
@@ -102,8 +84,6 @@ nav > span > a:focus {
     padding: 0;
 }
 
-
-
 .csv ul li {
     margin-bottom: 10px; 
     font-size: 14px; 
@@ -115,9 +95,68 @@ nav > span > a:focus {
     margin-bottom: 0; 
 }
 
-
 .csv ul li:hover {
     background-color: #f5f5f5; 
     border-radius: 4px; 
     transition: background-color 0.3s ease; 
 }
+
+.title-small {
+    font-size: 2rem;
+    font-weight: normal; 
+    line-height: 1.2; 
+}
+
+.my-custom-div {
+    padding: 5px; 
+    margin-bottom: 5px; 
+}
+
+.file-container {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.file-info {
+    flex: 1;
+}
+  
+.file-action {
+    margin-left: 10px;
+}
+  
+.btn-primary {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+  
+.navbar-brand.link-clean {
+    text-decoration: none; 
+    color: #fff !important; 
+}
+  
+.navbar-brand.link-clean:hover,
+.navbar-brand.link-clean:focus,
+.navbar-brand.link-clean:active {
+    text-decoration: none; 
+    color: #fff !important; 
+    background-color: transparent !important; 
+    outline: none; 
+}
+  
+  
+.navbar-nav .nav-link {
+    color: #fff !important;
+}
+  
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important; 
+    background-color: #3AA8C1; 
+    border-radius: 5px; 
+}
+
