@@ -2,7 +2,6 @@
   <% if user_file.errors.any? %>
     <div class="alert alert-danger">
       <h2><%= pluralize(user_file.errors.count, "error") %> prohibited this user_file from being saved:</h2>
-
       <ul>
         <% user_file.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,23 +11,23 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :name, "Nome" , class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
     <% if user_file.attachment.attached? %>
-      <%= form.label :attachment, class: "form-label" %>
+      <%= form.label :attachment, "Anexo", class: "form-label" %>
       <%= link_to user_file.attachment.filename, rails_blob_path(user_file.attachment), class: "form-control" %>
     <% else %>
-      <%= form.label :attachment, "Anexo",  class: "form-label" %>
-      <%= form.file_field :attachment, class: "form-control", required: true %>
+      <%= form.label :attachment, "Anexo", class: "form-label" %>
+      <%= form.file_field :attachment, class: "form-control", required: true unless local_assigns.has_key?(:readonly_mode) && readonly_mode %>
     <% end %>
   </div>
 
-  <div class="d-flex justify-content-between align-items-end">
-    <%= form.submit @user_file.new_record? ? "Criar Arquivo" : "Atualizar Arquivo", class: "btn btn-primary ms-auto" %>
+  <div class="mb-3">
+    <%= form.label :name, "Nome", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", readonly: local_assigns.has_key?(:readonly_mode) && readonly_mode %>
   </div>
+
+  <% if local_assigns.has_key?(:show_create_button) && show_create_button %> <!-- Verifica se a variável local show_create_button é verdadeira -->
+    <div class="d-flex justify-content-between align-items-end">
+      <%= form.submit "Criar", class: "btn btn-primary ms-auto" %>
+    </div>
+  <% end %>
 <% end %>
-
-

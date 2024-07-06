@@ -16,7 +16,8 @@
     <%= form.select :original_file_id,
                     UserFile.all.map { |f| [f.name, f.id] },
                     { value: @user_file.try(:id), selected: @user_file.try(:id) },
-                    class: "form-select" %>
+                    class: "form-select", 
+                    disabled: local_assigns.has_key?(:readonly_mode) && readonly_mode %>
   </div>
 
   <div class="mb-3">
@@ -24,7 +25,8 @@
     <%= form.select :source_language_id,
                     Language.all.map { |l| [l.name, l.id] },
                     { value: Language.first.id, selected: Language.first.id},
-                    class: "form-select" %>
+                    class: "form-select", 
+                    disabled: local_assigns.has_key?(:readonly_mode) && readonly_mode %>
   </div>
 
   <div class="mb-3">
@@ -32,16 +34,17 @@
     <%= form.select :target_language_id,
                     Language.all.map { |l| [l.name, l.id] },
                     { value: Language.last.id, selected: Language.last.id},
-                    class: "form-select" %>
+                    class: "form-select", 
+                    disabled: local_assigns.has_key?(:readonly_mode) && readonly_mode %>
   </div>
 
   <%= render partial: 'column_selector',
-             locals: { form: form, user_file: @user_file }
+             locals: { form: form, user_file: @user_file, readonly_mode: local_assigns.has_key?(:readonly_mode) && readonly_mode }
   %>
 
   <% if file_translation.new_record? %>
     <div class="d-flex justify-content-between align-items-end">
-      <%= form.submit "Traduzir arquivo", class: "btn btn-primary ms-auto" %>
+      <%= form.submit "Traduzir ", class: "btn btn-primary ms-auto" %>
     </div>
   <% end %>
 <% end %>

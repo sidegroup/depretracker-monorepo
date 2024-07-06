@@ -1,27 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="<%= line_translations_path %>" style="color: #ffff;">DepreTracker</a>
+  <a class="navbar-brand link-clean">Sýmpan Translator</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active link-clean" aria-current="page" href="<%= line_translations_path %>" style="color: #ffff;">Início</a>
+          <a class="nav-link active link-clean" aria-current="page" href="<%= line_translations_path %>">Início</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle link-clean" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffff;">
-            <%= I18n.t 'Data Preprocessing' %>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item link-clean" href="<%= user_files_path %>"><%= t('Files') %></a></li>
-            <li><a class="dropdown-item link-clean" href="<%= file_translations_path %>"><%= t('File Translation Jobs') %></a></li>
-            <li><a class="dropdown-item link-clean" href="<%= line_translations_path %>"><%= t('Translations') %></a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link link-clean" href="<%= user_files_path %>"><%= t('Collection') %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link link-clean" href="<%= file_translations_path %>"><%= t('Translated data collection') %></a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div style="height: 50px;"></div>
+<div style="height: 20px;"></div>
+
+<script>
+  function dropdownMenu () { 
+      console.log("Executando função")
+      const linkMenu = document.getElementById("linkMenu");
+      linkMenu.classList.add("show");
+
+      const dropdownMenu= document.getElementById("dropdownMenu");
+      dropdownMenu.classList.add("show");
+  } 
+  
+</script>

@@ -2,8 +2,15 @@
 pt:
   Back to list: Retornar
   Data Mining: Mineração de Dados
+  Collection: Conjunto de Dados
+  Translated data collection: Conjunto de Dados Traduzidos
+  Translated dataset details: Detalhes do Conjunto de Dados Traduzido
+  Collection Translated: Traduzir Conjunto de Dados
+  Input dataset: Conjunto de Dados de Entrada
+  New set: Novo Conjunto
   Data Preprocessing: Pré-processamento de Dados
   Delete: Deletar
+  Cancel: Cancelar
   File Translation Jobs: Tradução de arquivos
   File Translation: Tradução de arquivos
   Files: Arquivos
@@ -16,7 +23,9 @@ pt:
   Reviews: Revisões
   Total: Total
   Translations: Traduções
+  Translation: Traduzir 
   File Details: Detalhes do arquivo
+  Set details: Detalhes do Conjunto 
   Translate File: Traduzir arquivo 
   Target File: Arquivo de destino
   Source Language: Idioma original 
@@ -39,3 +48,18 @@ pt:
       x_hours:
         one: "1 hora"
         other: "%{count} horas"
+      x_days:
+        one: "1 dia"
+        other: "%{count} dias"
+      x_months:
+        one: "1 mês"
+        other: "%{count} meses"
+      x_years:
+        one: "1 ano"
+        other: "%{count} anos"
+  views:
+    pagination:
+      first: "Primeira"
+      previous: "Anterior"
+      next: "Próxima"
+      last: "Última"
