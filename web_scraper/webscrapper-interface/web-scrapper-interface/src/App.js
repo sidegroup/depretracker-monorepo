@@ -34,18 +34,6 @@ function App() {
         <Form.Label> subrredits: </Form.Label>
         <Form.Control as = "textarea" name="subreddits" placeholder="exemplo: subrredit1, subrredit2" required/>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Check type="radio">
-          <Form.Check.Input type="radio" name="tipo" value="depressivo" required/>
-          <Form.Check.Label> depressivo </Form.Check.Label>
-        </Form.Check>
-
-        <Form.Check type="radio">
-          <Form.Check.Input type="radio" name="tipo" value="neutro" required/>
-          <Form.Check.Label> neutro </Form.Check.Label>
-        </Form.Check>
-
-      </Form.Group>
       <Button variant="primary" className="button" type="submit">
         Submit
       </Button>
