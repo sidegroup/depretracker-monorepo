@@ -7,13 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active link-clean" aria-current="page" href="<%= line_translations_path %>">Início</a>
+          <a class="nav-link active link-clean" aria-current="page" href="<%= line_translations_path %>"> Revisão </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link link-clean" href="<%= user_files_path %>"><%= t('Collection') %></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link link-clean" href="<%= file_translations_path %>"><%= t('Translated data collection') %></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%=  t('Conjunto de dados') %>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<%= user_files_path %>"><%= t('Listagem') %></a></li>
+            <li><a class="dropdown-item" href="<%= file_translations_path %>"><%= t('Traduzidos') %></a></li>
+          </ul>
         </li>
       </ul>
     </div>

@@ -24,6 +24,7 @@ class ReviewController < ApplicationController
 
     if @next_line.nil?
       flash[:notice] = "Todos as traduções foram revisados."
+      @line_translation.file_translation.update!(status: FileTranslation.statuses[:'Completed'])
       redirect_to line_translations_path
       return
     end

@@ -1,15 +1,11 @@
 services:
   translator:
     build: ./translator
-    ports:
-      - "5000:80"
     volumes:
       - ./translator/app:/src/app
 
   db:
     image: postgres
-    ports:
-      - "5432:5432"
     volumes:
       - ./side-web/tmp/db:/var/lib/postgresql/data
     environment:
@@ -29,7 +25,5 @@ services:
 
   redis:
     image: redis
-    ports:
-      - "6379:6379"
     volumes:
       - ./side-web/tmp/redis:/data

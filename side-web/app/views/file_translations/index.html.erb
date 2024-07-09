@@ -13,9 +13,11 @@
             <div class="file-info">
               <%= render file_translation %>
             </div>
-            <div class="file-action">
-              <%= link_to t('Download'), download_file_translation_path(file_translation), class: 'btn btn-primary' %>
-            </div>
+            <% if file_translation.status == "Completed" %>
+              <div class="file-action">
+                <%= link_to t('Download'), download_file_translation_path(file_translation), class: 'btn btn-primary' %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
