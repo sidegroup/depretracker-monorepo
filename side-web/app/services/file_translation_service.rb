@@ -3,7 +3,7 @@
 class FileTranslationService
   include UserFilesHelper
 
-  BATCH_SIZE = 60
+  BATCH_SIZE = 2
 
   def initialize(file_translation)
     @file_translation = file_translation

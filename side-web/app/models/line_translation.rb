@@ -11,6 +11,7 @@ class LineTranslation < ApplicationRecord
   scope :translated, -> { where.not(translated_text: nil) }
   scope :not_translated, -> { where(translated_text: [nil, '']) }
   scope :with_error, -> { where("translated_text LIKE ?", "%Error%") }
+  scope :reviewedFileTranslation, -> (file_translation) { where(reviewed: true, file_translation: file_translation ) }
 
   # Enums
   enum status: { pending: 0, approved: 1, rejected: 2 }
