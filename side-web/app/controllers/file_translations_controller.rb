@@ -26,7 +26,7 @@ class FileTranslationsController < ApplicationController
 
     respond_to do |format|
       if @file_translation.save
-        format.html { redirect_to file_translation_url(@file_translation), notice: "Conjunto de dados traduzido com sucesso." }
+        format.html { redirect_to file_translation_url(@file_translation), notice: "Iniciado o processo de tradução" }
         format.json { render :show, status: :created, location: @file_translation }
       else
         format.html { render :new, status: :unprocessable_entity }
