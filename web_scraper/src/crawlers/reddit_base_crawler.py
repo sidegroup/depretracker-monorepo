@@ -4,7 +4,9 @@ from ..services.reddit_service import RedditService
 from ..factories.elastic_search_client import ElasticsearchClientFactory
 
 class RedditBaseCrawler:
+
     search_strings = ""
+    # tipos de sorteamentos que podem ser usados nos subrredits
     sort_types = ["relevance", "hot", "top", "new"]
     subreddits = []
     assunto_crowler = ""
@@ -20,6 +22,7 @@ class RedditBaseCrawler:
                                             client_id, client_secret, username, password, user_agent)
 
 
+    
     def crawl(self,):
         self.reddit_service.fetch_reddit_data(self.subreddits,
                                               self.search_strings,
