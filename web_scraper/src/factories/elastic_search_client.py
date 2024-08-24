@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 
-
+# Classe que cria um cliente para o ElasticSearch
 class ElasticsearchClientFactory:
     @staticmethod
     def create():

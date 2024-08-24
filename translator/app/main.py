@@ -1,12 +1,13 @@
 import json
 from typing import Union
 from deep_translator import GoogleTranslator
-
 from fastapi import FastAPI
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("facebook/nllb-200-1.3B")
+model = AutoModelForSeq2SeqLM.from_pretrained("facebook/nllb-200-1.3B")
 
 app = FastAPI()
-
-
 @app.get("/")
 def read_root():
     return {"ping": "pong"}
@@ -14,11 +15,10 @@ def read_root():
 
 @app.get("/translate")
 def translate_csv(text: str, source: str, target: str) -> Union[str, None]:
-    try:
-        translation = GoogleTranslator(source=source, target=target).translate(text)
-    except Exception as e:
-        if "Text length need to be between 0 and 5000 characters" in str(e):
-            return json.dumps({"error": "Text length need to be between 0 and 5000 characters"})
-
-        return json.dumps({"error": "Something went wrong with translation"})
-    return translation
+    inputs = tokenizer(text, return_tensors="pt", padding=True)
+    translated_tokens = model.generate(
+        **inputs,
+        forced_bos_token_id=tokenizer.lang_code_to_id["por_Latn"]
+    )
+    results = tokenizer.batch_decode(translated_tokens, skip_special_tokens=True)[0]
+    return results

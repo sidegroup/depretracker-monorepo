@@ -12,6 +12,6 @@ RUN npm install -g create-react-app
 RUN mkdir /home/app
 WORKDIR /home/app
 
-CMD ["/bin/bash", "-c", "cd ./web-scrapper-interface && npm install && npm start"]
+CMD ["/bin/bash", "-c", "cd ./web-scrapper-interface && npm install && npm run start"]
 
 
