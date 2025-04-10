@@ -11,10 +11,10 @@ class RedditBaseCrawler:
     subreddits = []
     assunto_crowler = ""
 
-    def __init__(self, client_id: str, client_secret: str, username: str, password:str, user_agent:str, search_string: str, subreddit: list[str], assunto_crowler: str):
+    def __init__(self, client_id: str, client_secret: str, username: str, password:str, user_agent:str, search_string: str, subreddit: list[str]):
         self.search_strings = search_string
         self.subreddits = subreddit
-        self.assunto_crowler = assunto_crowler
+        self.assunto_crowler = ""
         self.es_client = ElasticsearchClientFactory.create()
         post_repository = RedditSubmissionRepository(self.es_client, self.assunto_crowler + "posts")
         comment_repository = RedditCommentRepository(self.es_client, self.assunto_crowler + "comments")

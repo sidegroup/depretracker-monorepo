@@ -41,7 +41,7 @@ class RedditService:
                         for submission in submissions:
                             # se a submissão foi criada após 2017, não está excluída e não está bloqueada
                             if (
-                                    datetime.datetime.fromtimestamp(submission.created_utc).year > 2017
+                                    datetime.datetime.fromtimestamp(submission.created_utc).year > 2024
                                     and not submission.distinguished
                                     and not submission.locked
                             ):

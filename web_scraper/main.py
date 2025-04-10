@@ -23,14 +23,13 @@ def crawl():
     username: str = dados.get("username")
     password: str = dados.get("password")
     user_agent: str = dados.get("user_agent")
-    assunto: str = dados.get("assunto")
     search_string = dados.get("search_string")
 
     # retira os espaços em branco e separa as palavras por vírgula
     subreddit = [word.strip() for word in dados.get("subreddits").split(",")]
 
     #cria um objeto do tipo RedditBaseCrawler
-    crawler = RedditBaseCrawler(client_id, client_secret, username, password, user_agent, search_string, subreddit, assunto)
+    crawler = RedditBaseCrawler(client_id, client_secret, username, password, user_agent, search_string, subreddit)
 
     #realizar o crawling
     crawler.crawl()
