@@ -1,0 +1,34 @@
+.footer-toolbar, .footer-bottom {
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 16px; /* Espaçamento entre os links */
+    align-items: center;
+  }
+  
+  .footer-link {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    color: #cecfd7; /* Cor de hover */
+  }
+  
+  .footer-bottom-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
+  
+  .footer-text {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+  }
+  
