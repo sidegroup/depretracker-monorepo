@@ -39,6 +39,8 @@ services:
       - 5000:5000
     volumes:
       - .:/web_scraper
+    environment:
+      - PYTHONPATH=/web_scraper
     depends_on:
       - es
       - kibana
