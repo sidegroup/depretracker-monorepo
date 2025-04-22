@@ -23,6 +23,7 @@ class RedditService:
 
     # método que coleta os dados do Reddit
     def fetch_reddit_data(self, subreddits, search_strings, sort_types):
+
         # para cada subreddit
         for subreddit in subreddits:
         
@@ -45,6 +46,7 @@ class RedditService:
                                     and not submission.distinguished
                                     and not submission.locked
                             ):
+                                #author_submission_id = submission.author.fullname if submission.author else None
                                 # armazena a submissão
                                 self.post_repository.store(submission)
 
@@ -53,6 +55,8 @@ class RedditService:
                                     # Verifica se possui comentários aninhados
                                     if isinstance(comment, MoreComments):
                                         continue
+
+                                    #author_comment_id = comment.author.fullname if comment.author else None
                                     # armazena o comentário
                                     self.comment_repository.store(comment, submission.id)
 
@@ -64,3 +68,4 @@ class RedditService:
                         continue
                     
                     break
+

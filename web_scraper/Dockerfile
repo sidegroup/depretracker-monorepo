@@ -18,4 +18,6 @@ RUN pip install -r requirements.txt
 
 COPY . /web_scraper
 
+RUN pip install --force-reinstall praw==7.8.1
+
 CMD ["/bin/bash", "-c", "python3 main.py"]

@@ -52,7 +52,7 @@ def crawl():
         crawler = RedditBaseCrawler(client_id, client_secret, username, password, user_agent, search_string, subreddit, submission_repo, comment_repo)
         #realizar o crawling
         crawler.crawl()
-        return "Crawling iniciado com sucesso!", 200
+        return "Crawling Realizado com sucesso!", 200
     except Exception as e:
         return f"Erro durante o crawling: {str(e)}", 500
 
