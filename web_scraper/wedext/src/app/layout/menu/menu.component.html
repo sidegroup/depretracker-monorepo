@@ -1,0 +1,21 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-toolbar color="primary">WeDExt</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/home']">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/extrator']">
+        <mat-icon>web</mat-icon>
+        <span>Scraper</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['/dataset']">
+        <mat-icon>folder_open</mat-icon>
+        <span>Dataset</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
