@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LayoutModule } from './layout/layout.module';
-import { DatasetModule } from './dataset/dataset.module';
+//import { DatasetModule } from './dataset/dataset.module';
 import { ExtratorModule } from './extrator/extrator.module';
 
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -26,7 +26,7 @@ import { MatListModule } from '@angular/material/list';
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    DatasetModule,
+    //DatasetModule,
     ExtratorModule,
     MatCardModule,
     MatFormFieldModule,

@@ -9,7 +9,7 @@ services:
       - discovery.type=single-node
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - "xpack.security.enabled=false"
     ulimits:
       memlock:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - es
 
-  web_scraper:
+  web_scraper_be:
     stdin_open: true
     build:
       context: .
@@ -48,18 +48,20 @@ services:
   web_scrapper_interface:
     stdin_open: true
     build:
-      context: .
-      dockerfile: react
-
+        context: ./web_scrapper_interface/wedext
+        dockerfile: Dockerfile.angular
     volumes:
-      - ./webscrapper-interface:/home/app
+        - ./web_scrapper_interface/wedext:/app
+        - node_modules:/app/node_modules
     ports:
-      - 3000:3000
-    
+        - 4200:4200
     depends_on:
       - es
       - kibana
-      - web_scraper
+      - web_scraper_be
 
 networks:
   default:
+
+volumes:
+  node_modules:
