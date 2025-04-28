@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment.development";
 })
 export class ExtratorService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl+'/crawl';
 
   constructor(private http: HttpClient) {}
 

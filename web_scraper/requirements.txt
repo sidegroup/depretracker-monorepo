@@ -3,6 +3,8 @@ charset-normalizer==3.1.0
 elastic-transport==8.4.0
 elasticsearch==8.8.0
 elasticsearch-dsl==8.9.0
+Flask
+flask-cors>=4.0.0
 idna==3.4
 numpy==1.26.0
 panda==0.3.1
@@ -16,4 +18,4 @@ tzdata==2023.3
 update-checker==0.18.0
 urllib3==1.26.16
 websocket-client==1.6.0
-Flask
+

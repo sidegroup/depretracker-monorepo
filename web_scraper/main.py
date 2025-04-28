@@ -5,6 +5,7 @@ from src.crawlers.reddit_base_crawler import RedditBaseCrawler
 from src.services.elasticsearch_service import ElasticSearchService
 from src.factories.elastic_search_client import ElasticsearchClientFactory
 from flask import Flask, request, send_file
+from flask_cors import CORS
 
 from src.services.data_service import DataService
 from src.controllers.data_controller import DataController, data_blueprint
@@ -69,4 +70,4 @@ if __name__ == "__main__":
         print("Aguardando Elasticsearch...")
         sleep(5)
 
-    app.run(host='0.0.0.0')  # debug=False em produção!
+    app.run(host='0.0.0.0', port = 5000)
