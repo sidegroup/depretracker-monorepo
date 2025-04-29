@@ -2,6 +2,7 @@ import datetime
 import prawcore.exceptions
 from time import sleep
 from praw.models import MoreComments
+import praw
 from praw import Reddit
 
 
@@ -13,13 +14,15 @@ class RedditService:
                  client_id: str, client_secret: str, username: str, password:str, user_agent:str):
         self.post_repository = post_repository
         self.comment_repository = comment_repository
+
         self.redit_client = Reddit(
             client_id=client_id,
             client_secret=client_secret,
             username=username,
             password=password,
-            user_agent=user_agent
+            user_agent=user_agent,
         )
+        print(self.redit_client.user.me())
 
     # método que coleta os dados do Reddit
     def fetch_reddit_data(self, subreddits, search_strings, sort_types):
@@ -66,6 +69,6 @@ class RedditService:
                         print(f"Too many requests. Sleeping for {self.SLEEP_TIME} seconds.")
                         sleep(self.SLEEP_TIME)
                         continue
-                    
+
                     break
 

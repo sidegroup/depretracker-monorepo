@@ -11,7 +11,9 @@ export class ExtratorService {
 
   constructor(private http: HttpClient) {}
 
-  enviarDados(dados: any) {
-    return this.http.post(this.apiUrl, dados);
-  }
+ enviarDados(dados: any) {
+   return this.http.post(this.apiUrl, dados, {
+     headers: {'Content-Type': 'application/json'}
+   });
+ }
 }

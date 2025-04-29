@@ -4,7 +4,7 @@ import os
 from src.crawlers.reddit_base_crawler import RedditBaseCrawler
 from src.services.elasticsearch_service import ElasticSearchService
 from src.factories.elastic_search_client import ElasticsearchClientFactory
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 
 from src.services.data_service import DataService
@@ -14,6 +14,7 @@ from src.repositories.reddit_submission_repository import RedditSubmissionReposi
 
 #cria uma aplicação flask chamada "crawler"
 app = Flask("crawler")
+CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
 
 # cria cliente do elastic
 es_client = ElasticsearchClientFactory.create()
@@ -31,32 +32,46 @@ data_controller = DataController(data_service)
 
 # Registra o blueprint no app
 app.register_blueprint(data_blueprint)
+
 #cria uma rota para o endpoint "/crawl" que aceita apenas requisições do tipo POST
-@app.route("/crawl", methods=["POST"])
+@app.route("/crawl", methods=["POST", "OPTIONS"])
 def crawl():
     try:
-        #obtem os dados enviados no corpo do formulário
-        dados = request.form
+        if request.method == "OPTIONS":
+            return jsonify({"status": "ok"}), 200
 
-        tipo: str = dados.get("tipo")
-        client_id: str = dados.get("client_id")
-        client_secret: str = dados.get("client_secret")
-        username: str = dados.get("username")
-        password: str = dados.get("password")
-        user_agent: str = dados.get("user_agent")
-        search_string = dados.get("search_string")
+        dados = request.get_json()
 
-        # retira os espaços em branco e separa as palavras por vírgula
-        subreddit = [word.strip() for word in dados.get("subreddits").split(",")]
+        required_fields = [
+            "client_id", "client_secret", "username",
+            "password", "user_agent", "search_string", "subreddits"
+        ]
+        for field in required_fields:
+            if field not in dados or not dados[field]:
+                return jsonify({"error": f"Campo obrigatório ausente: {field}"}), 400
 
-        #cria um objeto do tipo RedditBaseCrawler
-        crawler = RedditBaseCrawler(client_id, client_secret, username, password, user_agent, search_string, subreddit, submission_repo, comment_repo)
-        #realizar o crawling
+        subreddits_str = dados["subreddits"].strip()
+        subreddit = [word.strip() for word in subreddits_str.split(",") if word.strip()]
+        if not subreddit:
+            return jsonify({"error": "Nenhum subreddit válido fornecido"}), 400
+
+        crawler = RedditBaseCrawler(
+            dados["client_id"],
+            dados["client_secret"],
+            dados["username"],
+            dados["password"],
+            dados["user_agent"],
+            dados["search_string"],
+            subreddit,
+            submission_repo,
+            comment_repo
+        )
+
         crawler.crawl()
-        return "Crawling Realizado com sucesso!", 200
-    except Exception as e:
-        return f"Erro durante o crawling: {str(e)}", 500
+        return jsonify({"message": "Crawling realizado com sucesso!"}), 200
 
+    except Exception as e:
+        return jsonify({"error": f"Erro durante o crawling: {str(e)}"}), 500
 
 if __name__ == "__main__":
     elastic_service = ElasticSearchService(es_client)
