@@ -14,7 +14,7 @@ class RedditSubmissionRepository:
         # cria um documento com os dados da submissão
         document = {
             "post_id": submission.id,  # id da submissão
-            "author_id": submission.author.name if submission.author else None,
+            "author_name": submission.author.name if submission.author else None,
             "date": datetime.datetime.fromtimestamp(submission.created_utc).strftime('%Y-%m-%d %H:%M:%S'), # converte a data para o formato 'YYYY-MM-DD HH:MM:SS'
             "title": submission.title,  # título da submissão
             "text": submission.selftext, # texto da submissão

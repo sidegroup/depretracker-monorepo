@@ -12,7 +12,7 @@ class RedditCommentRepository:
         # cria um documento com os dados do comentário
         document = {
             "id": comment.id, # id do comentário
-            "author_id": comment.author.name if comment.author else None,
+            "author_name": comment.author.name if comment.author else None,
             "post_id": post_id,  # id do post ao qual o comentário pertence
             "body": comment.body, # corpo do comentário
             "date": datetime.datetime.fromtimestamp(comment.created_utc).strftime('%Y-%m-%d %H:%M:%S'), # converte a data para o formato 'YYYY-MM-DD HH:MM:SS'
