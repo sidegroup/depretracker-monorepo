@@ -60,16 +60,46 @@
   gap: 1rem;
 }
 
+.no-data-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+::ng-deep .mat-column-author_name,
+::ng-deep .mat-column-id,
+::ng-deep .mat-column-post_id,
+::ng-deep .mat-column-date,
+::ng-deep .mat-column-title {
+  width: 100px;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::ng-deep .mat-column-text,
+::ng-deep .mat-column-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .controls-container {
     gap: 0.5rem;
   }
-  
+
   .full-height-card {
     margin: 8px;
   }
-  
+
   button {
     font-size: 12px;
   }

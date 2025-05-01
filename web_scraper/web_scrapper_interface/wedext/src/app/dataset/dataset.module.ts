@@ -27,7 +27,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
-    //DatasetComponent
+    DatasetComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +52,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
   ],
   exports: [
-    //DatasetComponent
+    DatasetComponent
   ]
 })
 export class DatasetModule { }

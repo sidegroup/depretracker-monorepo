@@ -1,4 +1,3 @@
-<!-- src/app/components/dataset/dataset.component.html -->
 <div class="full-page-container">
   <mat-card class="full-height-card">
     <mat-card-header>
@@ -6,19 +5,15 @@
     </mat-card-header>
 
     <mat-card-content class="card-content">
-      <!-- Controles superiores -->
+      <!-- Controles -->
       <div class="controls-container">
         <mat-button-toggle-group [(value)]="selectedDataType" aria-label="Tipo de dados">
           <mat-button-toggle value="submissions">Postagens</mat-button-toggle>
           <mat-button-toggle value="comments">Comentários</mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button mat-raised-button 
-                color="primary"
-                (click)="loadData()"
-                class="list-button">
-          <mat-icon>refresh</mat-icon>
-          Listar
+        <button mat-raised-button color="primary" (click)="loadData()" class="list-button">
+          <mat-icon>refresh</mat-icon> Listar
         </button>
 
         <mat-radio-group [(ngModel)]="selectedFormat" class="export-radio-group">
@@ -26,38 +21,75 @@
           <mat-radio-button value="json">JSON</mat-radio-button>
         </mat-radio-group>
 
-        <button mat-raised-button 
-                color="accent"
-                (click)="export(selectedDataType, selectedFormat)"
-                class="download-button">
-          <mat-icon>download</mat-icon>
-          Download
+        <button mat-raised-button color="accent" (click)="export(selectedDataType, selectedFormat)" class="download-button">
+          <mat-icon>download</mat-icon> Download
         </button>
       </div>
 
-      <!-- Estado de carregamento -->
+      <!-- Loading -->
       <div *ngIf="isLoading" class="loading-state">
         <mat-spinner [diameter]="40"></mat-spinner>
         <p>Carregando dados...</p>
       </div>
 
-      <!-- Conteúdo das tabelas -->
-      <div class="table-container">
-        <!-- Tabela de Postagens -->
-        <div *ngIf="!isLoading && selectedDataType === 'submissions'" class="table-wrapper">
-          <mat-table [dataSource]="submissions" class="mat-elevation-z8">
-            <!-- Colunas... -->
-          </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-        </div>
+      <!-- Tabela de Postagens -->
+      <div *ngIf="!isLoading && selectedDataType === 'submissions'" class="table-wrapper">
+        <mat-table [dataSource]="submissions" class="mat-elevation-z8">
+          <ng-container matColumnDef="author_name">
+            <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.author_name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="post_id">
+            <mat-header-cell *matHeaderCellDef>ID do Post</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.post_id }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="text">
+            <mat-header-cell *matHeaderCellDef>Texto</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.text }}</mat-cell>
+          </ng-container>
 
-        <!-- Tabela de Comentários -->
-        <div *ngIf="!isLoading && selectedDataType === 'comments'" class="table-wrapper">
-          <mat-table [dataSource]="comments" class="mat-elevation-z8">
-            <!-- Colunas... -->
-          </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-        </div>
+          <mat-header-row *matHeaderRowDef="submissionsColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: submissionsColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #submissionsPaginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
+      </div>
+
+      <!-- Tabela de Comentários -->
+      <div *ngIf="!isLoading && selectedDataType === 'comments'" class="table-wrapper">
+        <mat-table [dataSource]="comments" class="mat-elevation-z8">
+          <ng-container matColumnDef="author_name">
+            <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.author_name }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="post_id">
+            <mat-header-cell *matHeaderCellDef>ID do Post</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.post_id }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="body">
+            <mat-header-cell *matHeaderCellDef>Comentário</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.body }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="commentsColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: commentsColumns;"></mat-row>
+        </mat-table>
+       <mat-paginator #commentsPaginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
