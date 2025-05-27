@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -13,10 +13,22 @@ export class DatasetComponent implements OnInit, AfterViewInit {
   submissionsColumns: string[] = ['author_name', 'title', 'post_id', 'date', 'text'];
   commentsColumns: string[] = ['author_name', 'id', 'date', 'post_id', 'body'];
 
-  submissions = new MatTableDataSource<any>([]);
-  comments = new MatTableDataSource<any>([]);
+  currentPage = 0;
+  pageSize = 10;
+  totalItems = 0;
+
+  submissions: any[] = [];
+  comments: any[] = [];
+
+  submissionsTotal = 0;
+  commentsTotal = 0;
 
   isLoading = false;
+
+  counts = {
+    submissions: 0,
+    comments: 0
+  };
 
   selectedDataType: 'submissions' | 'comments' = 'submissions';
   selectedFormat: 'csv' | 'json' = 'csv';
@@ -29,21 +41,20 @@ export class DatasetComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
-
-  ngAfterViewInit(): void {
-    this.submissions.paginator = this.submissionsPaginator;
-    this.comments.paginator = this.commentsPaginator;
+   ngOnInit(): void {
+     this.loadData();
   }
-
+  ngAfterViewInit(): void {
+  // Garantindo a interface para proximas implementacoes
+}
   loadData(): void {
   this.isLoading = true;
 
   if (this.selectedDataType === 'submissions') {
-    this.dataService.getSubmissions().subscribe({
-      next: (data) => {
-        this.submissions.data = data;
-        this.submissions.paginator = this.submissionsPaginator;
+    this.dataService.getSubmissions(this.currentPage + 1, this.pageSize).subscribe({
+      next: (response) => {
+        this.submissions = response.data || [];
+        this.submissionsTotal = response.total || 0;
         this.isLoading = false;
       },
       error: (err) => {
@@ -52,10 +63,10 @@ export class DatasetComponent implements OnInit, AfterViewInit {
       }
     });
   } else {
-    this.dataService.getComments().subscribe({
-      next: (data) => {
-        this.comments.data = data;
-        this.comments.paginator = this.commentsPaginator;
+    this.dataService.getComments(this.currentPage + 1, this.pageSize).subscribe({
+      next: (response) => {
+        this.comments = response.data || [];
+        this.commentsTotal = response.total || 0;
         this.isLoading = false;
       },
       error: (err) => {
@@ -65,7 +76,23 @@ export class DatasetComponent implements OnInit, AfterViewInit {
     });
   }
 }
-
+  onPageChange(event: PageEvent): void {
+  this.currentPage = event.pageIndex;
+  this.pageSize = event.pageSize;
+  this.loadData();
+}
+onDataTypeChange(newType: 'submissions' | 'comments'): void {
+  if (this.selectedDataType !== newType) {
+    this.selectedDataType = newType;
+    this.currentPage = 0;
+    this.loadData();
+  }
+}
+  get totalLength(): number {
+  return this.selectedDataType === 'submissions'
+    ? this.submissionsTotal
+    : this.commentsTotal;
+}
 
   export(dataType: 'submissions' | 'comments', format: 'csv' | 'json'): void {
     const service$ = dataType === 'submissions'

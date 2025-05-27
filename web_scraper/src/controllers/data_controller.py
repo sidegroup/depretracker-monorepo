@@ -12,21 +12,24 @@ class DataController:
 
         data_blueprint.add_url_rule('/dados/submissoes', view_func=self.get_submissions)
         data_blueprint.add_url_rule('/dados/comentarios', view_func=self.get_comments)
-
-        data_blueprint.add_url_rule(
-            '/exportar/submissoes/<formato>',
-            view_func=self.export_submissions
-        )
-        data_blueprint.add_url_rule(
-            '/exportar/comentarios/<formato>',
-            view_func=self.export_comments
-        )
+        data_blueprint.add_url_rule('/exportar/submissoes/<formato>', view_func=self.export_submissions)
+        data_blueprint.add_url_rule('/exportar/comentarios/<formato>', view_func=self.export_comments)
+        data_blueprint.add_url_rule('/dados/contagem', view_func=self.get_counts)
 
     def get_submissions(self):
-        return jsonify(self.data_service.get_submissions())
+        page = int(request.args.get('page', 1))
+        page_size = int(request.args.get('page_size', 10))
+        result = self.data_service.get_submissions_paginated(page, page_size)
+        return jsonify({"data": result["data"], "total": result["total"]})
 
     def get_comments(self):
-        return jsonify(self.data_service.get_comments())
+        page = int(request.args.get('page', 1))
+        page_size = int(request.args.get('page_size', 10))
+        result = self.data_service.get_comments_paginated(page, page_size)
+        return jsonify({"data": result["data"], "total": result["total"]})
+    def get_counts(self):
+        counts = self.data_service.get_counts()
+        return jsonify(counts)
 
     def export_submissions(self, formato: str):
         return self._handle_export(

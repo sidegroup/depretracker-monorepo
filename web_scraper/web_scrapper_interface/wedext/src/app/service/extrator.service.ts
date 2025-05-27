@@ -11,9 +11,16 @@ export class ExtratorService {
 
   constructor(private http: HttpClient) {}
 
- enviarDados(dados: any) {
+ enviarDadosReddit(dados: any) {
    return this.http.post(this.apiUrl, dados, {
      headers: {'Content-Type': 'application/json'}
    });
  }
+
+ //EM CONSTRUÇAO
+  enviarDadosInstagram(dados: any) {
+    return this.http.post(this.apiUrl, dados, {
+      headers: {'Content-Type': 'application/json'}
+    });
+  }
 }

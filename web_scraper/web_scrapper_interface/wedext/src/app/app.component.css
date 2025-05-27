@@ -1,37 +1,134 @@
+/* app.component.css - CSS Global Revisado */
+
+/* Navbar Fixa */
 navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  z-index: 1000;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Sidenav Fixo */
+app-menu {
+  position: fixed;
+  left: 0;
+  top: 50px; /* Altura da navbar */
+  width: 250px;
+  height: calc(100vh - 50px);
+  z-index: 999;
+  background: #fff;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+  overflow-y: auto; /* Caso o menu seja longo */
+}
+
+/* Container Principal */
+.app-container {
+  display: block; /* Alterado de flex para block */
+  margin-top: 50px;
+  height: calc(100vh - 50px);
+}
+
+/* Conteúdo Principal */
+.main-content {
+  margin-left: 250px; /* Largura do sidenav */
+  padding: 15px;
+  transition: margin-left 0.3s ease;
+  overflow-y: auto;
+  min-height: calc(100vh - 50px); /* Garante altura total */
+}
+
+/* Logo */
+.logo {
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  cursor: pointer;
+  font-weight: 600;
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+/* Media Queries Ajustadas */
+@media (min-width: 1366px) {
+  navbar {
+    height: 65px;
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    z-index: 1000;
+    padding-left: 30px;
   }
-  
-  /* Container principal */
+
+  app-menu {
+    top: 65px;
+    height: calc(100vh - 65px);
+  }
+
   .app-container {
-    display: flex;
-    height: 100vh;
-    margin-top: 30px;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
   }
-  
-  /* Conteúdo principal */
+
   .main-content {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    
+    padding: 25px;
+    font-size: 1.2rem;
+    max-width: calc(1366px - 250px); /* Considera o sidenav */
+    margin-left: 250px;
   }
-  .logo:hover {
-    cursor: pointer;
-    font-weight: bold;
-    color: #ebebef; /* Ajuste conforme o design */
-    text-decoration: none;
+}
+
+@media (min-width: 1440px) {
+  navbar {
+    height: 70px;
+    font-size: 22px;
+    padding-left: 40px;
   }
-  
+
+  app-menu {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+
+  .app-container {
+    height: calc(100vh - 70px);
+    margin-top: 70px;
+  }
+
+  .main-content {
+    padding: 30px;
+    font-size: 1.3rem;
+    max-width: calc(1440px - 250px);
+    margin-left: 250px;
+  }
+}
+
+@media (min-width: 1920px) {
+  navbar {
+    height: 80px;
+    font-size: 24px;
+    padding-left: 50px;
+  }
+
+  app-menu {
+    top: 80px;
+    height: calc(100vh - 80px);
+  }
+
+  .app-container {
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+  }
+
+  .main-content {
+    padding: 40px;
+    font-size: 1.4rem;
+    max-width: calc(1600px - 250px);
+    margin-left: 250px;
+  }
+}

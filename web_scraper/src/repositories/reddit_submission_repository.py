@@ -23,7 +23,27 @@ class RedditSubmissionRepository:
         resp = self.es_client.index(index=self.target_index, id=document["post_id"], document=document)
         return resp
 
-    def list(self, scroll='2m', batch_size=1000):
+    def list(self, page=1, page_size=10):
+        from_ = (page - 1) * page_size
+        query = {
+            "from": from_,
+            "size": page_size,
+            "query": {
+                "match_all": {}
+            }
+        }
+
+        result = self.es_client.search(
+            index=self.target_index,
+            body=query
+        )
+
+        return {
+            "data": [hit["_source"] for hit in result["hits"]["hits"]],
+            "total": result["hits"]["total"]["value"]
+        }
+
+    def listAll(self, scroll='2m', batch_size=1000):
         query = {"query": {"match_all": {}}}
 
         # Inicia a busca com scroll
@@ -45,3 +65,7 @@ class RedditSubmissionRepository:
             all_hits.extend(hits)
 
         return all_hits
+
+    def count(self):
+        result = self.es_client.count(index=self.target_index)
+        return result['count']

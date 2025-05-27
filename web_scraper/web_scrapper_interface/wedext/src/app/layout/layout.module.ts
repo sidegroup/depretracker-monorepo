@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from "./about/about.component";
+import {UserGuideComponent} from "./user-guide/user-guide.component";
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,19 +21,23 @@ import {RouterLink} from "@angular/router";
   declarations: [
     HomeComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    AboutComponent,
+    UserGuideComponent
   ],
   exports: [
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    AboutComponent,
+    UserGuideComponent
   ],
-  
+
   imports: [
-    CommonModule, 
+    CommonModule,
     MatSidenav,
-    MatToolbarModule, 
+    MatToolbarModule,
     MatButtonModule,
-    MatCardModule,  
+    MatCardModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

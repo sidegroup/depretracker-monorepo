@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from "../../environments/environment.development";
 
@@ -11,13 +11,24 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getSubmissions(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/dados/submissoes`);
-  }
+getSubmissions(page: number, pageSize: number): Observable<{data: any[], total: number}> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('page_size', pageSize.toString());
 
-  getComments(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/dados/comentarios`);
-  }
+  return this.http.get<{data: any[], total: number}>(`${this.apiUrl}/dados/submissoes`, { params });
+}
+
+getComments(page: number, pageSize: number): Observable<{data: any[], total: number}> {
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('page_size', pageSize.toString());
+
+  return this.http.get<{data: any[], total: number}>(`${this.apiUrl}/dados/comentarios`, { params });
+}
+  getCounts(): Observable<{ submissions: number; comments: number }> {
+  return this.http.get<{ submissions: number; comments: number }>(`${this.apiUrl}/dados/contagem`);
+}
 
   exportSubmissions(format: 'csv' | 'json'): Observable<Blob | any[]> {
     if (format === 'csv') {

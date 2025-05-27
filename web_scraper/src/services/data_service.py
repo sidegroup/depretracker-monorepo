@@ -11,13 +11,35 @@ class DataService:
         self.submission_repo = submission_repo
         self.comment_repo = comment_repo
 
+    def get_submissions_paginated(self, page, page_size):
+
+        result = self.submission_repo.list(page, page_size)
+        return {
+            "data": result["data"],
+            "total": result["total"]
+        }
+
+    def get_comments_paginated(self, page, page_size):
+
+        result = self.comment_repo.list(page, page_size)
+        return {
+            "data": result["data"],
+            "total": result["total"]
+        }
+
     def get_submissions(self):
-        posts = self.submission_repo.list()
+        posts = self.submission_repo.listAll()
         return [post["_source"] for post in posts]
 
     def get_comments(self):
-        comments = self.comment_repo.list()
+        comments = self.comment_repo.listAll()
         return [comment["_source"] for comment in comments]
+
+    def get_counts(self):
+        return {
+            "submissions": self.submission_repo.count(),
+            "comments": self.comment_repo.count()
+        }
 
     def export_submissions(self, format: str = 'csv') -> Union[str, List[Dict]]:
         submissions = self.get_submissions()

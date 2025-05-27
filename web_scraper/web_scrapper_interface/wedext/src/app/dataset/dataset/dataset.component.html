@@ -3,11 +3,10 @@
     <mat-card-header>
       <mat-card-title>Dataset</mat-card-title>
     </mat-card-header>
-
     <mat-card-content class="card-content">
       <!-- Controles -->
       <div class="controls-container">
-        <mat-button-toggle-group [(value)]="selectedDataType" aria-label="Tipo de dados">
+        <mat-button-toggle-group [(value)]="selectedDataType" [(value)]="selectedDataType" (change)="onDataTypeChange($event.value)" aria-label="Tipo de dados">
           <mat-button-toggle value="submissions">Postagens</mat-button-toggle>
           <mat-button-toggle value="comments">Comentários</mat-button-toggle>
         </mat-button-toggle-group>
@@ -34,6 +33,9 @@
 
       <!-- Tabela de Postagens -->
       <div *ngIf="!isLoading && selectedDataType === 'submissions'" class="table-wrapper">
+        <div class="total-info" *ngIf="selectedDataType === 'submissions' && submissions.length > 0">
+          <p>Quantidade total de Postagens armazenadas: {{ submissionsTotal }}</p>
+        </div>
         <mat-table [dataSource]="submissions" class="mat-elevation-z8">
           <ng-container matColumnDef="author_name">
             <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
@@ -59,11 +61,21 @@
           <mat-header-row *matHeaderRowDef="submissionsColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: submissionsColumns;"></mat-row>
         </mat-table>
-        <mat-paginator #submissionsPaginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
+        <mat-paginator
+          [length]="totalLength"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPage"
+          [pageSizeOptions]="[5, 10, 20, 50]"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
       </div>
 
       <!-- Tabela de Comentários -->
       <div *ngIf="!isLoading && selectedDataType === 'comments'" class="table-wrapper">
+         <div class="total-info" *ngIf="selectedDataType === 'comments' && comments.length > 0">
+          <p>Quantidade total de Comentários armazenados: {{ commentsTotal }}</p>
+        </div>
         <mat-table [dataSource]="comments" class="mat-elevation-z8">
           <ng-container matColumnDef="author_name">
             <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
@@ -89,7 +101,14 @@
           <mat-header-row *matHeaderRowDef="commentsColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: commentsColumns;"></mat-row>
         </mat-table>
-       <mat-paginator #commentsPaginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" showFirstLastButtons> </mat-paginator>
+        <mat-paginator
+          [length]="totalLength"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPage"
+          [pageSizeOptions]="[5, 10, 20, 50]"
+          (page)="onPageChange($event)"
+          showFirstLastButtons>
+        </mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
