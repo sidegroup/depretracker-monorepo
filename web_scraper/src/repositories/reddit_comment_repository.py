@@ -28,6 +28,7 @@ class RedditCommentRepository:
         query = {
             "from": from_,
             "size": page_size,
+            "track_total_hits": True,
             "query": {
                 "match_all": {}
             }

@@ -80,12 +80,14 @@ export class DatasetComponent implements OnInit, AfterViewInit {
   this.currentPage = event.pageIndex;
   this.pageSize = event.pageSize;
   this.loadData();
+  this.scrollToTop();
 }
 onDataTypeChange(newType: 'submissions' | 'comments'): void {
   if (this.selectedDataType !== newType) {
     this.selectedDataType = newType;
     this.currentPage = 0;
     this.loadData();
+    this.scrollToTop();
   }
 }
   get totalLength(): number {
@@ -93,6 +95,12 @@ onDataTypeChange(newType: 'submissions' | 'comments'): void {
     ? this.submissionsTotal
     : this.commentsTotal;
 }
+  private scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 
   export(dataType: 'submissions' | 'comments', format: 'csv' | 'json'): void {
     const service$ = dataType === 'submissions'
