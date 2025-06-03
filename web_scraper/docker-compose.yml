@@ -1,0 +1,103 @@
+version: "3.8"
+services:
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    container_name: es
+    volumes:
+      - ./esdata1:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - xpack.security.enabled=false
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - cluster.routing.allocation.disk.watermark.low=95%
+      - cluster.routing.allocation.disk.watermark.high=98%
+      - cluster.routing.allocation.disk.watermark.flood_stage=99%
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      elastic-net:
+        aliases:
+          - elasticsearch-host
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sS http://localhost:9200/_cluster/health | grep -qE '\"status\":\"(green|yellow)\"'" ]
+      interval: 15s
+      timeout: 120s
+      retries: 10
+      start_period: 60s
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.7.1
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch-host:9200
+      - xpack.security.enabled=false
+      - SERVER_HOST=0.0.0.0
+      - SERVER_NAME=kibana
+    ports:
+      - 5601:5601
+    networks:
+      - elastic-net
+    depends_on:
+      es:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -sS -I http://localhost:5601/api/status | grep -q '200 OK'" ]
+      interval: 20s
+      timeout: 60s
+      retries: 10
+      start_period: 120s
+
+  web_scraper_be:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/web_scraper
+    environment:
+      - PYTHONPATH=/web_scraper
+    networks:
+      - elastic-net
+    depends_on:
+      es:
+        condition: service_healthy
+      kibana:
+        condition: service_healthy
+    healthcheck:
+        test: [ "CMD-SHELL", "curl -sS http://localhost:5000/healthcheck || exit 1" ]
+        interval: 20s
+        timeout: 15s
+        retries: 5
+
+  web_scrapper_interface:
+    stdin_open: true
+    build:
+        context: ./web_scrapper_interface/wedext
+        dockerfile: Dockerfile.angular
+    volumes:
+        - ./web_scrapper_interface/wedext:/app
+        - node_modules:/app/node_modules
+    ports:
+        - 4200:4200
+    networks:
+      - elastic-net
+    depends_on:
+        web_scraper_be:
+          condition: service_healthy
+
+networks:
+  elastic-net:
+    driver: bridge
+
+volumes:
+  node_modules:
