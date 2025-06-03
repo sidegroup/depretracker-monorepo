@@ -12,8 +12,9 @@ navbar {
   align-items: center;
   padding-left: 15px;
   z-index: 1000;
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--primary-red);
+  color: var(--text-light);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* Sidenav Fixo */
@@ -24,9 +25,33 @@ app-menu {
   width: 250px;
   height: calc(100vh - 50px);
   z-index: 999;
-  background: #fff;
-  box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+  background: var(--primary-blue);
+  box-shadow: 2px 0 4px rgba(0,0,0,0.2);
   overflow-y: auto; /* Caso o menu seja longo */
+}
+
+/* Estilo para as Tabs */
+::ng-deep .mat-tab-label {
+  color: var(--text-light) !important;
+  background-color: var(--secondary-blue-1) !important;
+  opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  background-color: var(--secondary-blue-2) !important;
+  color: var(--text-light) !important;
+}
+
+::ng-deep .mat-tab-header {
+  background-color: var(--primary-blue);
+}
+
+::ng-deep .mat-tab-link {
+  color: var(--text-light) !important;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: var(--secondary-red-2) !important;
 }
 
 /* Container Principal */
