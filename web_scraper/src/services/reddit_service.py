@@ -22,6 +22,7 @@ class RedditService:
             password=password,
             user_agent=user_agent,
         )
+        _ = self.redit_client.user.me()
 
     # método que coleta os dados do Reddit
     def fetch_reddit_data(self, subreddits, search_strings, sort_types):

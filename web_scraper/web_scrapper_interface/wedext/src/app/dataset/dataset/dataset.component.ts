@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
-import { MatTableDataSource } from '@angular/material/table';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackService } from '../../service/snack.service';
 
 @Component({
   selector: 'app-dataset',
@@ -38,7 +38,7 @@ export class DatasetComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataService: DataService,
-    private snackBar: MatSnackBar
+    private snackService: SnackService
   ) {}
 
    ngOnInit(): void {
@@ -59,7 +59,7 @@ export class DatasetComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.handleError('Erro ao carregar postagens', err);
+        this.handleError('Nenhuma postagem disponível', err);
       }
     });
   } else {
@@ -71,7 +71,7 @@ export class DatasetComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.handleError('Erro ao carregar comentários', err);
+        this.handleError('Nenhum comentário disponível', err);
       }
     });
   }
@@ -112,12 +112,14 @@ onDataTypeChange(newType: 'submissions' | 'comments'): void {
         const filename = `${dataType}_${this.getTimestamp()}.${format}`;
         if (format === 'csv') {
           this.downloadFile(data as Blob, filename);
+           this.snackService.showSuccess(`Dados exportados como ${format.toUpperCase()}!`);
         } else {
           const jsonBlob = new Blob(
             [JSON.stringify(data, null, 2)],
             { type: 'application/json' }
           );
           this.downloadFile(jsonBlob, filename);
+          this.snackService.showSuccess(`Dados exportados como ${format.toUpperCase()}!`);
         }
       },
       error: (err) => this.handleError('Erro na exportação', err)
@@ -136,13 +138,10 @@ onDataTypeChange(newType: 'submissions' | 'comments'): void {
     anchor.click();
     window.URL.revokeObjectURL(url);
   }
-
-  private handleError(message: string, error: any): void {
-    console.error(message, error);
-    this.snackBar.open(
-      `${message}: ${error.message || 'Erro desconhecido'}`,
-      'Fechar',
-      { duration: 5000 }
-    );
+  private handleError(context: string, error: any): void {
+    console.error(context, error);
+    const status = error?.status || 0;
+    this.snackService.showErrorByStatus(status, context);
   }
+
 }

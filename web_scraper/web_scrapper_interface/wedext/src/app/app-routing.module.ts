@@ -5,9 +5,7 @@ import { DatasetComponent } from './dataset/dataset/dataset.component';
 import { ExtratorComponent } from './extrator/extrator/extrator.component';
 import {AboutComponent} from "./layout/about/about.component";
 import {UserGuideComponent} from "./layout/user-guide/user-guide.component";
-
-
-
+import {FooterComponent } from "./layout/footer/footer.component";
 
 const routes: Routes = [
   {
@@ -29,6 +27,10 @@ const routes: Routes = [
   {
     path: 'user-guide',
     component: UserGuideComponent
+  },
+  {
+    path: 'footer',
+    component: FooterComponent
   },
 
   {

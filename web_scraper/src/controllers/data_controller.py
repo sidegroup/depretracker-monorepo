@@ -20,12 +20,16 @@ class DataController:
         page = int(request.args.get('page', 1))
         page_size = int(request.args.get('page_size', 10))
         result = self.data_service.get_submissions_paginated(page, page_size)
+        if not result["data"]:
+            return jsonify({"error": "Nenhum post dispoível"}), 404
         return jsonify({"data": result["data"], "total": result["total"]})
 
     def get_comments(self):
         page = int(request.args.get('page', 1))
         page_size = int(request.args.get('page_size', 10))
         result = self.data_service.get_comments_paginated(page, page_size)
+        if not result["data"]:
+            return jsonify({"error": "Nenhum comentário dispoível"}), 404
         return jsonify({"data": result["data"], "total": result["total"]})
     def get_counts(self):
         counts = self.data_service.get_counts()

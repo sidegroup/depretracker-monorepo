@@ -6,6 +6,7 @@ from src.services.elasticsearch_service import ElasticSearchService
 from src.factories.elastic_search_client import ElasticsearchClientFactory
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
+from prawcore.exceptions import OAuthException, ResponseException, Forbidden
 
 from src.services.data_service import DataService
 from src.controllers.data_controller import DataController, data_blueprint
@@ -53,7 +54,7 @@ def crawl():
         subreddits_str = dados["subreddits"].strip()
         subreddit = [word.strip() for word in subreddits_str.split(",") if word.strip()]
         if not subreddit:
-            return jsonify({"error": "Nenhum subreddit válido fornecido"}), 400
+            return jsonify({"error": "Nenhum subreddit válido fornecido"}), 404
 
         crawler = RedditBaseCrawler(
             dados["client_id"],
@@ -69,6 +70,9 @@ def crawl():
 
         crawler.crawl()
         return jsonify({"message": "Crawling realizado com sucesso!"}), 200
+
+    except (OAuthException, ResponseException, Forbidden) as auth_error:
+        return jsonify({"error": "Credenciais inválidas para Reddit"}), 401
 
     except Exception as e:
         return jsonify({"error": f"Erro durante o crawling: {str(e)}"}), 500

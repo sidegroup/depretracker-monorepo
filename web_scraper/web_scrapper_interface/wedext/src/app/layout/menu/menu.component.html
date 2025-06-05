@@ -1,5 +1,9 @@
 <mat-sidenav mode="side" opened class="sidenav">
-    <mat-toolbar color="primary">WeDEx</mat-toolbar>
+   <mat-toolbar class="sidenav-toolbar">
+    <a [routerLink]="['/home']" class="logo-link">
+    <img src="assets/icons/icone_sidebar.png" alt="WeDEx Logo" class="sidebar-logo" />
+    </a>
+   </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/home']">
         <mat-icon>home</mat-icon>

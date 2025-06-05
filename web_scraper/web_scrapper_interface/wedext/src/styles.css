@@ -1,4 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  /* Cores primárias (60%) */
+  --primary-red: #e30b21;
+  --primary-blue: #021542;
+  --primary-blue-rgb: 2, 21, 66; /* RGB values for opacity */
+
+  /* Cores secundárias (30%) */
+  --secondary-red-1: #b11528;
+  --secondary-red-2: #e83648;
+  --secondary-blue-1: #354368;
+  --secondary-red-3: #83132c;
+  --secondary-red-4: #ed6773;
+  --secondary-blue-2: #67718d;
+
+  /* Cores de destaque (10%) */
+  --accent-red-1: #561231;
+  --accent-red-2: #f39aa1;
+  --accent-blue: #99a0b3;
+  --accent-purple: #271238;
+  --accent-pink: #f8ccd0;
+  --accent-gray: #ccd0d9;
+
+  /* Cores de texto */
+  --text-light: #ffffff;
+  --text-dark: #000000;
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--accent-gray);
+}
+
+/* Estilo para tags strong */
+strong {
+  color: var(--primary-red);
+  font-weight: 600;
+}
+
+  .mat-mdc-snack-bar-container {
+  &.snackbar-error {
+    --mdc-snackbar-container-color: #83132c !important;
+    --mdc-snackbar-supporting-text-color: white !important;
+    --mat-mdc-snack-bar-button-color: white !important;
+  }
+
+  &.snackbar-success {
+    --mdc-snackbar-container-color: #83132c !important;
+    --mdc-snackbar-supporting-text-color: white !important;
+    --mat-mdc-snack-bar-button-color: white !important;
+  }
+
+  &.snackbar-info {
+    --mdc-snackbar-container-color: #354368 !important;
+    --mdc-snackbar-supporting-text-color: white !important;
+    --mat-mdc-snack-bar-button-color: white !important;
+  }
+}

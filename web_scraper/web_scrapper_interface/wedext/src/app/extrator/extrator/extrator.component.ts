@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExtratorService } from '../../service/extrator.service';
+import { SnackService } from '../../service/snack.service';
 
 @Component({
   selector: 'app-extrator',
@@ -19,7 +19,7 @@ export class ExtratorComponent {
     private fb: FormBuilder,
     private extratorService: ExtratorService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: SnackService
   ) {
     // Formulário Reddit
     this.redditForm = this.fb.group({
@@ -57,10 +57,19 @@ export class ExtratorComponent {
     this.loading = true;
     this.extratorService.enviarDadosReddit(this.redditForm.value).subscribe({
       next: (res) => {
-        this.snackBar.open('Extração Reddit realizada!', 'Fechar', { duration: 3000 });
-        this.router.navigate(['/dataset']);
+         this.snackBar.showSuccess('Extração Reddit realizada!');
+         this.loading = false;
+         this.router.navigate(['/dataset']);
       },
-      error: (err) => this.handleError(err, 'Reddit')
+      error: (err) => {
+        if (err.status === 404) {
+          this.snackBar.showErrorByStatus(err.status, err.error?.error || 'Subreddit não encontrado');
+        }
+        else {
+          this.snackBar.showErrorByStatus(err.status);
+        }
+        this.loading = false;
+      }
     });
   }
 
@@ -70,20 +79,20 @@ export class ExtratorComponent {
     this.loading = true;
     this.extratorService.enviarDadosInstagram(this.instagramForm.value).subscribe({
       next: (res) => {
-        this.snackBar.open('Extração Instagram realizada!', 'Fechar', { duration: 3000 });
+        this.snackBar.showSuccess('Extração Instagram realizada!');
         this.router.navigate(['/dataset']);
       },
       error: (err) => this.handleError(err, 'Instagram')
     });
   }
 
-  private handleError(err: any, platform: string) {
-    console.error(err);
-    let message = `Erro na extração do ${platform}`;
-    if (err.status === 401 || err.status === 403) {
-      message = 'Credenciais inválidas!';
-    }
-    this.snackBar.open(message, 'Fechar', { duration: 4000 });
-    this.loading = false;
-  }
+private handleError(err: any, platform: string) {
+  console.error(err);
+  const status = err.status || 0;
+  this.snackBar.showErrorByStatus(
+    status,
+    `Erro na extração do ${platform}`
+  );
+  this.loading = false;
+}
 }
