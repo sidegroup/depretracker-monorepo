@@ -37,17 +37,13 @@
           <p>Quantidade total de Postagens armazenadas: {{ submissionsTotal }}</p>
         </div>
         <mat-table [dataSource]="submissions" class="mat-elevation-z8">
-          <ng-container matColumnDef="author_name">
-            <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.author_name }}</mat-cell>
+          <ng-container matColumnDef="post_id">
+            <mat-header-cell *matHeaderCellDef>ID do Post</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.post_id }}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="title">
             <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="post_id">
-            <mat-header-cell *matHeaderCellDef>ID do Post</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.post_id }}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
@@ -77,27 +73,22 @@
           <p>Quantidade total de Comentários armazenados: {{ commentsTotal }}</p>
         </div>
         <mat-table [dataSource]="comments" class="mat-elevation-z8">
-          <ng-container matColumnDef="author_name">
-            <mat-header-cell *matHeaderCellDef>Autor</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.author_name }}</mat-cell>
-          </ng-container>
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="post_id">
             <mat-header-cell *matHeaderCellDef>ID do Post</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.post_id }}</mat-cell>
           </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
+          </ng-container>
           <ng-container matColumnDef="body">
             <mat-header-cell *matHeaderCellDef>Comentário</mat-header-cell>
             <mat-cell *matCellDef="let element">{{ element.body }}</mat-cell>
           </ng-container>
-
           <mat-header-row *matHeaderRowDef="commentsColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: commentsColumns;"></mat-row>
         </mat-table>

@@ -10,8 +10,8 @@ import { SnackService } from '../../service/snack.service';
   styleUrls: ['./dataset.component.css']
 })
 export class DatasetComponent implements OnInit, AfterViewInit {
-  submissionsColumns: string[] = ['author_name', 'title', 'post_id', 'date', 'text'];
-  commentsColumns: string[] = ['author_name', 'id', 'date', 'post_id', 'body'];
+  submissionsColumns: string[] = ['post_id', 'title', 'date', 'text'];
+  commentsColumns: string[] = ['id', 'post_id', 'date', 'body'];
 
   currentPage = 0;
   pageSize = 10;
@@ -59,7 +59,11 @@ export class DatasetComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.handleError('Nenhuma postagem disponível', err);
+        if (err.status === 404) {
+          this.resetToFirstPage('submissions');
+        } else {
+          this.handleError('Nenhuma postagem disponível', err);
+        }
       }
     });
   } else {
@@ -71,10 +75,28 @@ export class DatasetComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.handleError('Nenhum comentário disponível', err);
+        if (err.status === 404) {
+          this.resetToFirstPage('comments');
+        } else {
+          this.handleError('Nenhum comentário disponível', err);
+        }
       }
     });
   }
+}
+
+private resetToFirstPage(dataType: 'submissions' | 'comments'): void {
+  this.currentPage = 0;
+  this.snackService.showError(`Página inválida. Voltando para a primeira página.`);
+
+  // Atualizar o paginador visual
+  if (dataType === 'submissions' && this.submissionsPaginator) {
+    this.submissionsPaginator.firstPage();
+  } else if (this.commentsPaginator) {
+    this.commentsPaginator.firstPage();
+  }
+
+  this.loadData();
 }
   onPageChange(event: PageEvent): void {
   this.currentPage = event.pageIndex;

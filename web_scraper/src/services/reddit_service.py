@@ -49,7 +49,6 @@ class RedditService:
                                     and not submission.distinguished
                                     and not submission.locked
                             ):
-                                #author_submission_id = submission.author.fullname if submission.author else None
                                 # armazena a submissão
                                 self.post_repository.store(submission)
 
@@ -59,7 +58,6 @@ class RedditService:
                                     if isinstance(comment, MoreComments):
                                         continue
 
-                                    #author_comment_id = comment.author.fullname if comment.author else None
                                     # armazena o comentário
                                     self.comment_repository.store(comment, submission.id)
 

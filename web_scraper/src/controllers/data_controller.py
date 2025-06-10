@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, send_file, Response
+from flask import Blueprint, jsonify, request, send_file, Response, current_app
 import io
 from typing import Union
 
@@ -17,20 +17,90 @@ class DataController:
         data_blueprint.add_url_rule('/dados/contagem', view_func=self.get_counts)
 
     def get_submissions(self):
-        page = int(request.args.get('page', 1))
-        page_size = int(request.args.get('page_size', 10))
-        result = self.data_service.get_submissions_paginated(page, page_size)
-        if not result["data"]:
-            return jsonify({"error": "Nenhum post dispoível"}), 404
-        return jsonify({"data": result["data"], "total": result["total"]})
+        try:
+            page = int(request.args.get('page', 1))
+            page_size = int(request.args.get('page_size', 10))
+
+            # Obter o total de itens primeiro
+            total_items = self.data_service.get_total_submissions()
+
+            # Cálculo seguro de páginas
+            total_pages = total_items // page_size
+            if total_items % page_size > 0:
+                total_pages += 1
+            if total_pages == 0:
+                total_pages = 1
+
+            # Validar número da página
+            if page < 1 or (total_items > 0 and page > total_pages):
+                return jsonify({
+                    "error": f"Página inválida. Páginas disponíveis: 1-{total_pages}",
+                    "total": total_items
+                }), 400
+
+            result = self.data_service.get_submissions_paginated(page, page_size)
+
+            # Se não houver dados mas a página é válida
+            if not result.get("data"):
+                return jsonify({
+                    "data": [],
+                    "total": total_items,
+                    "current_page": page,
+                    "total_pages": total_pages
+                })
+
+            return jsonify({
+                "data": result["data"],
+                "total": total_items,
+                "current_page": page,
+                "total_pages": total_pages
+            })
+        except Exception as e:
+            current_app.logger.error(f"Erro em get_submissions: {str(e)}")
+            return jsonify({"error": "Erro interno no servidor"}), 500
 
     def get_comments(self):
-        page = int(request.args.get('page', 1))
-        page_size = int(request.args.get('page_size', 10))
-        result = self.data_service.get_comments_paginated(page, page_size)
-        if not result["data"]:
-            return jsonify({"error": "Nenhum comentário dispoível"}), 404
-        return jsonify({"data": result["data"], "total": result["total"]})
+        try:
+            page = int(request.args.get('page', 1))
+            page_size = int(request.args.get('page_size', 10))
+
+            # Obter o total de itens primeiro
+            total_items = self.data_service.get_total_comments()
+
+            # Cálculo seguro de páginas
+            total_pages = total_items // page_size
+            if total_items % page_size > 0:
+                total_pages += 1
+            if total_pages == 0:  # Garante pelo menos 1 página
+                total_pages = 1
+
+            # Validar número da página
+            if page < 1 or (total_items > 0 and page > total_pages):
+                return jsonify({
+                    "error": f"Página inválida. Páginas disponíveis: 1-{total_pages}",
+                    "total": total_items
+                }), 400
+
+            result = self.data_service.get_comments_paginated(page, page_size)
+
+            # Se não houver dados mas a página é válida
+            if not result.get("data"):
+                return jsonify({
+                    "data": [],
+                    "total": total_items,
+                    "current_page": page,
+                    "total_pages": total_pages
+                })
+
+            return jsonify({
+                "data": result["data"],
+                "total": total_items,
+                "current_page": page,
+                "total_pages": total_pages
+            })
+        except Exception as e:
+            current_app.logger.error(f"Erro em get_comments: {str(e)}")
+            return jsonify({"error": "Erro interno no servidor"}), 500
     def get_counts(self):
         counts = self.data_service.get_counts()
         return jsonify(counts)

@@ -45,17 +45,20 @@ strong {
     --mdc-snackbar-container-color: #83132c !important;
     --mdc-snackbar-supporting-text-color: white !important;
     --mat-mdc-snack-bar-button-color: white !important;
+    --mat-mdc-snack-bar-label-color: white !important;
   }
 
   &.snackbar-success {
-    --mdc-snackbar-container-color: #83132c !important;
+    --mdc-snackbar-container-color: #354368 !important;
     --mdc-snackbar-supporting-text-color: white !important;
     --mat-mdc-snack-bar-button-color: white !important;
+    --mat-mdc-snack-bar-label-color: white !important;
   }
 
   &.snackbar-info {
     --mdc-snackbar-container-color: #354368 !important;
     --mdc-snackbar-supporting-text-color: white !important;
     --mat-mdc-snack-bar-button-color: white !important;
+    --mat-mdc-snack-bar-label-color: white !important;
   }
 }

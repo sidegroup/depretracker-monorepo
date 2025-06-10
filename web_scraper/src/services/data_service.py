@@ -35,11 +35,11 @@ class DataService:
         comments = self.comment_repo.listAll()
         return [comment["_source"] for comment in comments]
 
-    def get_counts(self):
-        return {
-            "submissions": self.submission_repo.count(),
-            "comments": self.comment_repo.count()
-        }
+    def get_total_comments(self):
+        return self.comment_repo.count()
+
+    def get_total_submissions(self):
+        return self.submission_repo.count()
 
     def export_submissions(self, format: str = 'csv') -> Union[str, List[Dict]]:
         submissions = self.get_submissions()
