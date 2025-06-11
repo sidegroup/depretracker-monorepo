@@ -1,0 +1,243 @@
+.full-page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-height-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.table-container {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-table {
+  flex: 1;
+  overflow: auto;
+}
+
+.loading-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.export-radio-group {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Estilo do botão de download */
+.download-button {
+  background-color: var(--primary-red) !important;
+  color: var(--text-light) !important;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.download-button:hover {
+  background-color: var(--secondary-red-1) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo dos radio buttons */
+::ng-deep .mat-mdc-radio-button {
+  --mdc-radio-state-layer-size: 40px;
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio {
+  padding: var(--mdc-radio-state-layer-size);
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio .mdc-radio__background::before {
+  background-color: rgba(var(--primary-blue-rgb), 0.7) !important;
+  opacity: 0.7;
+}
+
+::ng-deep .mat-mdc-radio-button.mat-accent {
+  --mdc-radio-selected-focus-icon-color: var(--primary-blue);
+  --mdc-radio-selected-hover-icon-color: var(--primary-blue);
+  --mdc-radio-selected-icon-color: var(--primary-blue);
+  --mdc-radio-selected-pressed-icon-color: var(--primary-blue);
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio__background {
+  opacity: 0.7;
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio__background .mdc-radio__outer-circle {
+  border-color: var(--primary-blue) !important;
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio__background .mdc-radio__inner-circle {
+  border-color: var(--primary-blue) !important;
+  opacity: 0.7;
+}
+
+::ng-deep .mat-mdc-radio-button .mat-ripple-element {
+  background-color: rgba(var(--primary-blue-rgb), 0.7) !important;
+}
+
+::ng-deep .mdc-radio__background::before {
+  background-color: rgba(var(--primary-blue-rgb), 0.7) !important;
+}
+
+/* Estilo dos botões de alternância (Postagens/Comentários) */
+::ng-deep .mat-button-toggle-checked {
+  background-color: rgba(var(--primary-blue-rgb), 0.85) !important;
+}
+
+/* Override específico para garantir que o texto seja branco quando selecionado */
+::ng-deep .mat-button-toggle-checked,
+::ng-deep .mat-button-toggle-checked * {
+  color: white !important;
+}
+
+/* Garantir que o texto dentro do botão selecionado seja visível */
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-label-content,
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button {
+  color: white !important; /* Definindo explicitamente como branco para garantir visibilidade */
+  font-weight: 500 !important; /* Tornando o texto um pouco mais forte */
+  letter-spacing: 0.02em !important; /* Melhorando a legibilidade */
+  text-shadow: 0px 0px 1px rgba(0,0,0,0.2) !important; /* Sombra sutil para melhorar o contraste */
+}
+
+/* Estilo adicional para garantir que o texto seja visível */
+::ng-deep .mat-button-toggle-checked {
+  color: white !important;
+}
+
+::ng-deep .mat-button-toggle-group {
+  border-color: var(--primary-blue) !important;
+}
+
+::ng-deep .mat-button-toggle {
+  color: var(--primary-blue) !important;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .mat-button-toggle:hover {
+  background-color: rgba(var(--primary-blue-rgb), 0.6) !important;
+  color: var(--text-light) !important;
+}
+
+/* Garantir contraste adequado no hover */
+::ng-deep .mat-button-toggle-checked:hover {
+  background-color: var(--primary-blue) !important;
+  color: var(--text-light) !important;
+  opacity: 0.9;
+}
+
+/* Selector mais específico para estilização de texto em botões ativos */
+::ng-deep .mat-button-toggle-group .mat-button-toggle.mat-button-toggle-checked button.mat-button-toggle-button span.mat-button-toggle-label-content {
+  color: white !important;
+}
+
+/* Estilos específicos para os botões com nossas classes personalizadas */
+.data-type-toggle .toggle-btn.mat-button-toggle-checked {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Garantir que a cor do texto seja sempre visível */
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.no-data-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+::ng-deep .mat-column-author_name,
+::ng-deep .mat-column-id,
+::ng-deep .mat-column-post_id,
+::ng-deep .mat-column-date,
+::ng-deep .mat-column-title {
+  width: 100px;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::ng-deep .mat-column-text,
+::ng-deep .mat-column-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.total-info {
+  margin: 16px 0;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* Garantir que o ícone de checkmark seja branco */
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button .mat-button-toggle-label-content mat-icon,
+::ng-deep .mat-button-toggle-checked mat-icon {
+  color: white !important;
+}
+
+/* Aplicar cor branca para qualquer SVG ou ícone dentro do botão */
+::ng-deep .mat-button-toggle-checked svg,
+::ng-deep .mat-button-toggle-checked .mat-icon {
+  fill: white !important;
+  color: white !important;
+}
+
+/* Estilo específico para os checkmarks em elementos mat-button-toggle */
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked .mat-button-toggle-focus-overlay,
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked::before,
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked::after {
+  border-color: white !important;
+  color: white !important;
+}
+
+/* Aumentar a especificidade para garantir que o checkmark seja branco */
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon,
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon svg,
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon path {
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
+}
