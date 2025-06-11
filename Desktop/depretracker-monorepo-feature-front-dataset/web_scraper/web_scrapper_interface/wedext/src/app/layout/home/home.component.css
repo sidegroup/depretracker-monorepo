@@ -1,0 +1,78 @@
+.home-card {
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
+mat-card-header {
+  background-color: var(--primary-blue);
+  padding: 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wde-logo {
+ width: 280px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+[mat-card-avatar] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+  text-align: center;
+}
+
+mat-icon {
+  margin-right: 8px;
+}
+
+mat-card-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  padding: 24px;
+}
+
+mat-card-content p {
+  margin-bottom: 16px;
+}
+
+mat-card-content p:last-child {
+  margin-bottom: 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+button.mat-button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+button.mat-button:hover {
+  background-color: var(--secondary-blue-1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

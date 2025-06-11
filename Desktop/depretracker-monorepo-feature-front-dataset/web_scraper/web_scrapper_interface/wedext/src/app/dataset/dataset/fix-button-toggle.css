@@ -1,0 +1,8 @@
+/* Estilos específicos para corrigir o problema de visibilidade do texto nos botões de alternância */
+.mat-button-toggle-checked {
+  color: white !important;
+}
+
+.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: white !important;
+}

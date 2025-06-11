@@ -1,0 +1,36 @@
+<mat-card class="home-card">
+  <mat-card-header>
+    <mat-card-title>
+      Guia do Usuário
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>
+      A navegação na ferramenta WeDEx é feita por meio das abas <strong>"Extrator"</strong> e <strong>"Dataset"</strong>. Na aba Extrator, o usuário pode:
+    </p>
+    <ul>
+      <li>Inserir suas credenciais da API do Reddit</li>
+      <li>Definir palavras-chave e subreddits de interesse</li>
+      <li>Iniciar o processo de coleta de dados</li>
+      <li>Destacamos que todas as extrações são realizadas a partir de <strong>2024</strong> até o dia corrente</li>
+    </ul>
+    <p>
+      Na aba Dataset, é possível:
+    </p>
+    <ul>
+      <li>Visualizar os dados extraídos (postagens e comentários)</li>
+      <li>Exportar os resultados em <strong>JSON</strong> ou <strong>CSV</strong></li>
+    </ul>
+    <p>
+      Para utilizar o WeDEx com a API do Reddit:
+    </p>
+    <ol>
+      <li>Acesse a <a href="https://www.reddit.com/prefs/apps" target="_blank" rel="noopener noreferrer">página de criação de aplicativos clicando aqui.</a></li>
+      <li>Crie um novo app do tipo <strong>script</strong></li>
+      <li>Use <code>http://localhost:8080</code> como redirect URI</li>
+      <li>Copie o <a href="javascript:void(0)" (click)="openImage('assets/img/personal_key.png')"><strong>client ID</strong></a> e o <a href="javascript:void(0)" (click)="openImage('assets/img/secret_key.png')"><strong>client secret</strong></a> exibidos</li>
+      <li>Consulte a <a href="https://www.reddit.com/dev/api/" target="_blank" rel="noopener noreferrer">documentação da API do Reddit</a> para mais detalhes</li>
+    </ol>
+  </mat-card-content>
+</mat-card>

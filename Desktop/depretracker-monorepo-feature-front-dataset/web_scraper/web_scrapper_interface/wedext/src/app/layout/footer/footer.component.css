@@ -1,0 +1,21 @@
+.footer-bottom {
+  background-color: #021542;
+  color: white;
+  padding: 0;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.footer-text {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+}
