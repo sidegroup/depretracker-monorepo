@@ -63,12 +63,13 @@
   background-color: var(--primary-red) !important;
   color: var(--text-light) !important;
   transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .download-button:hover {
   background-color: var(--secondary-red-1) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo dos radio buttons */
@@ -115,8 +116,27 @@
 
 /* Estilo dos botões de alternância (Postagens/Comentários) */
 ::ng-deep .mat-button-toggle-checked {
-  background-color: var(--primary-blue) !important;
-  color: var(--text-light) !important;
+  background-color: rgba(var(--primary-blue-rgb), 0.85) !important;
+}
+
+/* Override específico para garantir que o texto seja branco quando selecionado */
+::ng-deep .mat-button-toggle-checked,
+::ng-deep .mat-button-toggle-checked * {
+  color: white !important;
+}
+
+/* Garantir que o texto dentro do botão selecionado seja visível */
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-label-content,
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button {
+  color: white !important; /* Definindo explicitamente como branco para garantir visibilidade */
+  font-weight: 500 !important; /* Tornando o texto um pouco mais forte */
+  letter-spacing: 0.02em !important; /* Melhorando a legibilidade */
+  text-shadow: 0px 0px 1px rgba(0,0,0,0.2) !important; /* Sombra sutil para melhorar o contraste */
+}
+
+/* Estilo adicional para garantir que o texto seja visível */
+::ng-deep .mat-button-toggle-checked {
+  color: white !important;
 }
 
 ::ng-deep .mat-button-toggle-group {
@@ -129,8 +149,32 @@
 }
 
 ::ng-deep .mat-button-toggle:hover {
-  background-color: var(--secondary-blue-1) !important;
+  background-color: rgba(var(--primary-blue-rgb), 0.6) !important;
   color: var(--text-light) !important;
+}
+
+/* Garantir contraste adequado no hover */
+::ng-deep .mat-button-toggle-checked:hover {
+  background-color: var(--primary-blue) !important;
+  color: var(--text-light) !important;
+  opacity: 0.9;
+}
+
+/* Selector mais específico para estilização de texto em botões ativos */
+::ng-deep .mat-button-toggle-group .mat-button-toggle.mat-button-toggle-checked button.mat-button-toggle-button span.mat-button-toggle-label-content {
+  color: white !important;
+}
+
+/* Estilos específicos para os botões com nossas classes personalizadas */
+.data-type-toggle .toggle-btn.mat-button-toggle-checked {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Garantir que a cor do texto seja sempre visível */
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: white !important;
+  font-weight: 600 !important;
 }
 
 .no-data-message {
@@ -166,4 +210,34 @@
   margin: 16px 0;
   font-weight: 500;
   font-size: 16px;
+}
+
+/* Garantir que o ícone de checkmark seja branco */
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-button .mat-button-toggle-label-content mat-icon,
+::ng-deep .mat-button-toggle-checked mat-icon {
+  color: white !important;
+}
+
+/* Aplicar cor branca para qualquer SVG ou ícone dentro do botão */
+::ng-deep .mat-button-toggle-checked svg,
+::ng-deep .mat-button-toggle-checked .mat-icon {
+  fill: white !important;
+  color: white !important;
+}
+
+/* Estilo específico para os checkmarks em elementos mat-button-toggle */
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked .mat-button-toggle-focus-overlay,
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked::before,
+::ng-deep .mat-button-toggle-appearance-standard.mat-button-toggle-checked::after {
+  border-color: white !important;
+  color: white !important;
+}
+
+/* Aumentar a especificidade para garantir que o checkmark seja branco */
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon,
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon svg,
+::ng-deep .data-type-toggle .mat-button-toggle.mat-button-toggle-checked .mat-icon path {
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
 }

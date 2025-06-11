@@ -89,10 +89,30 @@ button {
   filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.2));
 }
 
+.icon-button:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
 .icon-button.active {
   opacity: 1;
   transform: scale(1.1);
-  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.4));
+}
+
+/* Estilo para links no extrator */
+.mat-hint a {
+  color: var(--primary-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.mat-hint a:hover {
+  color: var(--secondary-blue-1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 /* Media Queries para responsividade */

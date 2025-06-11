@@ -40,6 +40,37 @@ strong {
   font-weight: 600;
 }
 
+/* Estilo global para links */
+a {
+  color: var(--primary-blue);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration-thickness: 1.5px;
+}
+
+a:hover {
+  color: var(--secondary-blue-1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+a:active {
+  color: var(--secondary-blue-2);
+}
+
+/* Estilo para tags strong dentro de links */
+a strong {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+/* Garantir que os botões de alternância da aplicação mostrem o texto branco quando selecionados */
+.mat-button-toggle-checked,
+.mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: white !important;
+}
+
   .mat-mdc-snack-bar-container {
   &.snackbar-error {
     --mdc-snackbar-container-color: #83132c !important;

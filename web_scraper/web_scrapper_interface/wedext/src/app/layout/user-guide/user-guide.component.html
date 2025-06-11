@@ -7,30 +7,33 @@
 
   <mat-card-content>
     <p>
-      A navegação na ferramenta Wedex é feita por meio das abas <strong>"Extrator"</strong> e <strong>"Dataset"</strong>. Na aba Extrator, o usuário pode:
+      A navegação na ferramenta WeDEx é feita por meio das abas <strong>"Extrator"</strong> e <strong>"Dataset"</strong>. Uma vez que esta aplicação utiliza a API do Reddit, para conseguir realizar a extração é necessário:
     </p>
-    <ul>
-      <li>Inserir suas credenciais da API do Reddit</li>
-      <li>Definir palavras-chave e subreddits de interesse</li>
-      <li>Iniciar o processo de coleta de dados</li>
-      <li>Destacamos que todas as extrações são realizadas a partir de <strong>2024</strong> até o dia corrente</li>
-    </ul>
     <p>
-      Na aba Dataset, é possível:
-    </p>
-    <ul>
-      <li>Visualizar os dados extraídos (postagens e comentários)</li>
-      <li>Exportar os resultados em <strong>JSON</strong> ou <strong>CSV</strong></li>
-    </ul>
-    <p>
-      Para utilizar o Wedex com a API do Reddit:
+      Criar suas credenciais na API do Reddit:
     </p>
     <ol>
-      <li>Acesse a <a href="https://www.reddit.com/prefs/apps" target="_blank" rel="noopener noreferrer">página de criação de aplicativos</a></li>
+      <li>Crie uma conta na referida rede social, caso não tenha.</li>
+      <li>Acesse a <a href="https://www.reddit.com/prefs/apps" target="_blank" rel="noopener noreferrer">página de criação de aplicativos para desenvolvedores clicando aqui.</a></li>
       <li>Crie um novo app do tipo <strong>script</strong></li>
+      <li>Nomeie seu app da forma que desejar e faça uma breve descrição do seu objetivo com este app</li>
+      <li>O campo about url não é obrigatório</li>
       <li>Use <code>http://localhost:8080</code> como redirect URI</li>
-      <li>Copie o <strong>client ID</strong> e o <strong>client secret</strong> exibidos</li>
+      <li>Clique em <strong>create app</strong></li>
+      <li>Copie o <a href="javascript:void(0)" (click)="openImage('assets/img/personal_key.png')"><strong>client ID</strong></a> e o <a href="javascript:void(0)" (click)="openImage('assets/img/secret_key.png')"><strong>client secret</strong></a> exibidos</li>
       <li>Consulte a <a href="https://www.reddit.com/dev/api/" target="_blank" rel="noopener noreferrer">documentação da API do Reddit</a> para mais detalhes</li>
+    </ol>
+     <p>
+      Para realizar a extração, na aba Extrator:
+    </p>
+    <ol>
+      <li>Insira o usuário e senha da sua conta no Reddit.</li>
+      <li>Utilize o Client ID e o Client Secret, como mostrado anteriormente.</li>
+      <li>O User Agent deve conter o nome da aplicação, sua versão e o nome de usuário do Reddit (ou um contato). Ex: WeDEx v1.0 by /u/seu_usuario</li>
+      <li>Digite as palavras-chave que deseja buscar, separando por vírgula ou utilizando "OR"</li>
+      <li>Adicione os subreddits que serão vasculhados, separados por vírgula</li>
+      <li>Clique em "Extrair". O tempo de extração dependerá da quantidade de palavras-chave, subreddits e da velocidade da sua internet, que pode levar alguns minutos</li>
+      <li>Ao finalizar a extração, você será redirecionado para a aba "Dataset", onde, ao clicar nos botões "Postagens" ou "Comentários", poderá visualizar os dados extraídos em formato de tabela e exportá-los em CSV ou JSON</li>
     </ol>
   </mat-card-content>
 </mat-card>

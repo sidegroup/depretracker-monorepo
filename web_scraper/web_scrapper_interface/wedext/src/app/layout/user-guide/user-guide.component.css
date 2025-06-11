@@ -14,6 +14,26 @@ mat-card-header {
   border-radius: 12px 12px 0 0;
 }
 
+/* Estilos padrão aplicados para todos os links no componente */
+mat-card-content a {
+  color: var(--primary-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+mat-card-content a:hover {
+  color: var(--secondary-blue-1);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+mat-card-content a:active {
+  color: var(--secondary-blue-2);
+}
+
 mat-card-title {
   font-size: 2rem;
   font-weight: 600;
@@ -32,17 +52,6 @@ mat-card-content {
   color: var(--text-dark);
   padding: 32px;
   letter-spacing: 0.3px;
-}
-
-mat-card-content a {
-  color: var(--primary-blue);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-mat-card-content a:hover {
-  color: var(--secondary-blue-1);
 }
 
 mat-card-content strong {

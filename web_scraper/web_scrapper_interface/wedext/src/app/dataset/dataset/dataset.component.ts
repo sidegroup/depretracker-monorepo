@@ -11,7 +11,7 @@ import { SnackService } from '../../service/snack.service';
 })
 export class DatasetComponent implements OnInit, AfterViewInit {
   submissionsColumns: string[] = ['post_id', 'title', 'date', 'text'];
-  commentsColumns: string[] = ['id', 'post_id', 'date', 'body'];
+  commentsColumns: string[] = ['id', 'date', 'body'];
 
   currentPage = 0;
   pageSize = 10;
