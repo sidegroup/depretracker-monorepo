@@ -2,6 +2,8 @@
 
 Wedex é uma aplicação completa de extração, visualização e download de dados de redes sociais, composta por backend em Python, frontend em Angular, e stack ELK (Elasticsearch + Kibana) para armazenamento.
 
+**OBS: As pastas estão sendo referidas como web_scraper pois nas primeiras versões esta nomenclatura foi utilizada, porém, a ferramenta está em processo de remodelação e transferência para outro diretório, onde os mesmos serão nomedados corretamente.**
+
 ## 🧰 Requisitos
 
 - [Docker](https://www.docker.com/)
@@ -50,5 +52,3 @@ Os containers possuem verificações de saúde para garantir a inicialização c
 ├── docker-compose.yml # Orquestração dos serviços
 ├── Makefile # Comandos utilitários
 └── README.md # Este arquivo
-
-**OBS: As pastas estão sendo referidas como web_scraper pois nas primeiras versões esta nomenclatura foi utilizada, porém, a ferramenta está em processo de remodelação e transferência para outro diretório, onde os mesmos serão nomedados corretamente.**
