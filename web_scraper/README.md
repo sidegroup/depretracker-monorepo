@@ -1,38 +1,52 @@
-# DepreTracker - Web Scraper
+# Wedex - Web Data Extractor
 
-## Como executar
-Considerando que você está dentro da pasta `web_scraper`:
+Wedex é uma aplicação completa de extração, visualização e download de dados de redes sociais, composta por backend em Python, frontend em Angular, e stack ELK (Elasticsearch + Kibana) para armazenamento.
+
+## 🧰 Requisitos
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- `make` instalado na sua máquina
+
+---
+
+## 🚀 Como executar
+
+Certifique-se de estar dentro da pasta `web_scraper`:
 
 ```bash
-make build # apenas na primeira vez, para instalar as dependências no docker
-make run # executa o script
-```
+make build  # Apenas na primeira vez. Instala as dependências e constrói os containers
+make run    # Inicia todos os serviços
 
-## Kibana
-Para facilitar a visualização dos dados coletados, é possível utilizar o Kibana.
-Para isso acesse http://localhost:5601/app/dev_tools#/console e execute o seguinte comando:
+---
 
-Dica: Basta copiar e colar o comando no console do Kibana e apertar `ctrl + enter` para executar.
+## 🧱 Arquitetura dos Serviços
 
+- **web_scraper_be**: API backend em Flask que utiliza a PRAW para se comunicar com a Reddit, extrai os dados e envia ao Elasticsearch.
+- **web_scrapper_interface**: Interface web em Angular para interação com os dados extraídos.
+- **Elasticsearch**: Armazena os dados extraídos da web.
+- **Kibana**: Dashboard para visualização dos dados presentes no Elasticsearch.
 
-### Para exemplos com o dataset deprimido
-```bash
-GET reddit_depressed_posts/_count
+---
 
-GET reddit_depressed_comments/_count
+## ✅ Healthchecks
 
-GET reddit_depressed_posts/_search
+Os containers possuem verificações de saúde para garantir a inicialização correta dos serviços:
 
-GET reddit_depressed_comments/_search
-```
+- **Elasticsearch** só é considerado ativo quando estiver com status `green` ou `yellow`.
+- **Kibana** só inicia após o Elasticsearch estar saudável.
+- **Backend** espera Elasticsearch e Kibana.
+- **Frontend** depende do backend.
 
-### Para exemplos com o dataset não deprimido
-```bash
-GET reddit_neutral_posts/_count
+---
 
-GET reddit_neutral_comments/_count
+## 📁 Estrutura de Pastas
 
-GET reddit_neutral_posts/_search
-
-GET reddit_neutral_comments/_search
-```
+├── web_scraper/ # Backend 
+│ └── Dockerfile # Dockerfile do backend
+├── web_scrapper_interface/
+│ └── wedext/ # Código Angular do frontend
+│ └── Dockerfile.angular # Dockerfile do frontend
+├── docker-compose.yml # Orquestração dos serviços
+├── Makefile # Comandos utilitários
+└── README.md # Este arquivo
